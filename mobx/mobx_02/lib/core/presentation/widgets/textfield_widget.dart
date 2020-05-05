@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import 'mixins/textfield_widget_mixin.dart';
 
 class TextFieldWidget extends StatelessWidget with TextFieldWidgetMixin {
-  final IconData prefixIcon;
-  final String hintText;
-  final String messageError;
-  final Function onChangedCallBack;
+  final IconData iconeParaPrefixo;
+  final String textoDeAjuda;
+  final String mensagemDeErro;
+  final Function funcaoDeCallbackParaAlteracao;
 
   const TextFieldWidget({
-    this.prefixIcon,
-    this.hintText,
-    this.messageError = '',
-    this.onChangedCallBack,
+    this.iconeParaPrefixo,
+    this.textoDeAjuda,
+    this.mensagemDeErro = '',
+    this.funcaoDeCallbackParaAlteracao,
   });
 
   @override
@@ -23,13 +23,15 @@ class TextFieldWidget extends StatelessWidget with TextFieldWidgetMixin {
           height: 40,
           child: Stack(
             children: [
-              Align(alignment: Alignment.centerLeft, child: Icon(prefixIcon)),
+              Align(
+                  alignment: Alignment.centerLeft,
+                  child: Icon(iconeParaPrefixo)),
               TextField(
                 onChanged: (value) {
-                  onChangedCallBack([value]);
+                  funcaoDeCallbackParaAlteracao([value]);
                 },
                 decoration: InputDecoration(
-                  hintText: hintText,
+                  hintText: textoDeAjuda,
                   contentPadding: const EdgeInsets.only(
                     left: 30.0,
                     right: 0,
@@ -41,7 +43,7 @@ class TextFieldWidget extends StatelessWidget with TextFieldWidgetMixin {
             ],
           ),
         ),
-        errorMessage(messageError: messageError),
+        exibirMensagemDeErro(mensagem: mensagemDeErro),
       ],
     );
   }

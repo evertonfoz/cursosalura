@@ -22,22 +22,23 @@ class LoginPage extends StatelessWidget with LoginPageMixin {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextFieldWidget(
-                onChangedCallBack: _loginPageMobx.registerEmail,
-                prefixIcon: Icons.email,
-                hintText: 'Informe o email',
-                messageError: !isAValidEmail(email: _loginPageMobx.email.value)
-                    ? 'O email é obrigatório'
-                    : '',
+                funcaoDeCallbackParaAlteracao: _loginPageMobx.atualizarEmail,
+                iconeParaPrefixo: Icons.email,
+                textoDeAjuda: 'Informe o email',
+                mensagemDeErro:
+                    !oEmailEhValido(email: _loginPageMobx.email.value)
+                        ? 'O email é obrigatório'
+                        : '',
               ),
               SizedBox(
                 height: 20,
               ),
               TextFieldWidget(
-                onChangedCallBack: _loginPageMobx.registerPassword,
-                prefixIcon: Icons.security,
-                hintText: 'Informe a senha',
-                messageError:
-                    !isAValidPassword(password: _loginPageMobx.password.value)
+                funcaoDeCallbackParaAlteracao: _loginPageMobx.atualizarSenha,
+                iconeParaPrefixo: Icons.security,
+                textoDeAjuda: 'Informe a senha',
+                mensagemDeErro:
+                    !aSenhaEhValida(senha: _loginPageMobx.senha.value)
                         ? 'A senha é obritatória'
                         : '',
               ),
@@ -46,9 +47,9 @@ class LoginPage extends StatelessWidget with LoginPageMixin {
               ),
               RaisedButton(
                   child: Text('Acessar'),
-                  onPressed: isAValidForm(
+                  onPressed: oFormularioEhValido(
                           email: _loginPageMobx.email.value,
-                          password: _loginPageMobx.password.value)
+                          senha: _loginPageMobx.senha.value)
                       ? () async {
                           Navigator.push(
                             context,

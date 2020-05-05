@@ -2,21 +2,21 @@ import 'package:mobx/mobx.dart';
 
 class LoginPageMobx {
   Observable<String> email = Observable('');
-  Observable<String> password = Observable('');
+  Observable<String> senha = Observable('');
 
-  Action registerEmail;
-  Action registerPassword;
+  Action atualizarEmail;
+  Action atualizarSenha;
 
   LoginPageMobx() {
-    registerEmail = Action(_registerEmail);
-    registerPassword = Action(_registerPassword);
+    atualizarEmail = Action(_atualizarEmail);
+    atualizarSenha = Action(_atualizarSenha);
   }
 
-  _registerEmail(String newValue) {
-    email.value = newValue;
+  _atualizarEmail(String novoEmail) {
+    email.value = novoEmail;
   }
 
-  _registerPassword(String newValue) {
-    password.value = newValue;
+  _atualizarSenha(String novaSenha) {
+    senha.value = novaSenha;
   }
 }

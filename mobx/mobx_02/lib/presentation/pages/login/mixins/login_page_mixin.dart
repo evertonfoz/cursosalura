@@ -1,13 +1,13 @@
 mixin LoginPageMixin {
-  isAValidEmail({String email}) {
+  oEmailEhValido({String email}) {
     return email.trim().length > 0;
   }
 
-  isAValidPassword({String password}) {
-    return password.trim().length > 0;
+  aSenhaEhValida({String senha}) {
+    return senha.trim().length > 0;
   }
 
-  isAValidForm({String email, String password}) {
-    return (isAValidEmail(email: email) && isAValidPassword(password: password));
+  oFormularioEhValido({String email, String senha}) {
+    return (oEmailEhValido(email: email) && aSenhaEhValida(senha: senha));
   }
 }

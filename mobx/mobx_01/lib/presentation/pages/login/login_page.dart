@@ -10,7 +10,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> with LoginPageMixin {
   String _email = '';
-  String _password = '';
+  String _senha = '';
 
   @override
   Widget build(BuildContext context) {
@@ -24,50 +24,45 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextFieldWidget(
-              onChangedCallBack: (newValue) {
+              funcaoDeCallbackParaAlteracao: (newValue) {
                 setState(() {
                   _email = newValue;
                 });
               },
-              prefixIcon: Icons.email,
-              hintText: 'Informe o email',
-              messageError:
-                  !isAValidEmail(email: _email) ? 'O email é obrigatório' : '',
+              iconeParaPrefixo: Icons.email,
+              textoDeAjuda: 'Informe o email',
+              mensagemDeErro:
+                  !oEmailEhValido(email: _email) ? 'O email é obrigatório' : '',
             ),
             SizedBox(
               height: 20,
             ),
             TextFieldWidget(
-              onChangedCallBack: (newValue) {
+              funcaoDeCallbackParaAlteracao: (newValue) {
                 setState(() {
-                  _password = newValue;
+                  _senha = newValue;
                 });
               },
-              prefixIcon: Icons.security,
-              hintText: 'Informe a senha',
-              messageError: !isAValidPassword(password: _password)
-                  ? 'A senha é obritatória'
-                  : '',
+              iconeParaPrefixo: Icons.security,
+              textoDeAjuda: 'Informe a senha',
+              mensagemDeErro:
+                  !aSenhaEhValida(senha: _senha) ? 'A senha é obritatória' : '',
             ),
             SizedBox(
               height: 20,
             ),
             RaisedButton(
                 child: Text('Acessar'),
-                onPressed: (isAValidForm(email: _email, password: _password))
-                    ? _formSubmit
+                onPressed: (oFormularioEhValido(email: _email, senha: _senha))
+                    ? () async => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => HomePage(),
+                          ),
+                        )
                     : null), // _formSubmit),
           ],
         ),
-      ),
-    );
-  }
-
-  _formSubmit() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => HomePage(),
       ),
     );
   }
