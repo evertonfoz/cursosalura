@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobx01/core/presentation/widgets/textfield_widget.dart';
+import 'package:mobx01/presentation/pages/home/home_page.dart';
 import 'package:mobx01/presentation/pages/login/mixins/login_page_mixin.dart';
 
 class LoginPage extends StatefulWidget {
@@ -57,8 +58,18 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
   }
 
   _formSubmit() {
-    setState(() {
-      if (!_isFormSubmitted) _isFormSubmitted = true;
-    });
+    if (isAValidForm(
+        email: emailController.text, password: passwordController.text))
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => HomePage(),
+        ),
+      );
+    else {
+      setState(() {
+        if (!_isFormSubmitted) _isFormSubmitted = true;
+      });
+    }
   }
 }
