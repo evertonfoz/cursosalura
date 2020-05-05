@@ -9,9 +9,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> with LoginPageMixin {
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  bool _isFormSubmitted = false;
+  String _email = '';
+  String _password = '';
 
   @override
   Widget build(BuildContext context) {
@@ -25,23 +24,28 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextFieldWidget(
-              textEditingController: emailController,
+              onChangedCallBack: (newValue) {
+                setState(() {
+                  _email = newValue;
+                });
+              },
               prefixIcon: Icons.email,
               hintText: 'Informe o email',
-              messageError: (_isFormSubmitted &&
-                      !isAValidEmail(email: emailController.text))
-                  ? 'O email é obrigatório'
-                  : '',
+              messageError:
+                  !isAValidEmail(email: _email) ? 'O email é obrigatório' : '',
             ),
             SizedBox(
               height: 20,
             ),
             TextFieldWidget(
-              textEditingController: passwordController,
+              onChangedCallBack: (newValue) {
+                setState(() {
+                  _password = newValue;
+                });
+              },
               prefixIcon: Icons.security,
               hintText: 'Informe a senha',
-              messageError: (_isFormSubmitted &&
-                      !isAValidPassword(password: passwordController.text))
+              messageError: !isAValidPassword(password: _password)
                   ? 'A senha é obritatória'
                   : '',
             ),
@@ -50,7 +54,9 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
             ),
             RaisedButton(
                 child: Text('Acessar'),
-                onPressed: _formSubmit), // _formSubmit),
+                onPressed: (isAValidForm(email: _email, password: _password))
+                    ? _formSubmit
+                    : null), // _formSubmit),
           ],
         ),
       ),
@@ -58,18 +64,11 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
   }
 
   _formSubmit() {
-    if (isAValidForm(
-        email: emailController.text, password: passwordController.text))
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => HomePage(),
-        ),
-      );
-    else {
-      setState(() {
-        if (!_isFormSubmitted) _isFormSubmitted = true;
-      });
-    }
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => HomePage(),
+      ),
+    );
   }
 }
