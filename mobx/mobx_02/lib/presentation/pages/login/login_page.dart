@@ -8,6 +8,8 @@ import 'mobx/login_page_mobx.dart';
 
 class LoginPage extends StatelessWidget with LoginPageMixin {
   final _loginPageMobx = LoginPageMobx();
+  final FocusNode _emailNode = FocusNode();
+  final FocusNode _senhaNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +24,9 @@ class LoginPage extends StatelessWidget with LoginPageMixin {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextFieldWidget(
+                focusNode: _emailNode,
+                funcaoDeCallbackParaSubmissaoDoText: () =>
+                    FocusScope.of(context).nextFocus(),
                 funcaoDeCallbackParaAlteracao: _loginPageMobx.atualizarEmail,
                 iconeParaPrefixo: Icons.email,
                 textoDeAjuda: 'Informe o email',
@@ -34,6 +39,12 @@ class LoginPage extends StatelessWidget with LoginPageMixin {
                 height: 20,
               ),
               TextFieldWidget(
+                focusNode: _senhaNode,
+                funcaoDeCallbackParaSubmissaoDoText: oFormularioEhValido(
+                        email: _loginPageMobx.email.value,
+                        senha: _loginPageMobx.senha.value)
+                    ? () async => navegaParaPaginaInicial(context: context)
+                    : () => FocusScope.of(context).previousFocus(),
                 funcaoDeCallbackParaAlteracao: _loginPageMobx.atualizarSenha,
                 iconeParaPrefixo: Icons.security,
                 textoDeAjuda: 'Informe a senha',
@@ -50,18 +61,20 @@ class LoginPage extends StatelessWidget with LoginPageMixin {
                   onPressed: oFormularioEhValido(
                           email: _loginPageMobx.email.value,
                           senha: _loginPageMobx.senha.value)
-                      ? () async {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => HomePage(),
-                            ),
-                          );
-                        }
+                      ? () async => navegaParaPaginaInicial(context: context)
                       : null), // _formSubmit),
             ],
           );
         }),
+      ),
+    );
+  }
+
+  navegaParaPaginaInicial({BuildContext context}) async {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => HomePage(),
       ),
     );
   }

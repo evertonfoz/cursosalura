@@ -6,13 +6,17 @@ class TextFieldWidget extends StatelessWidget with TextFieldWidgetMixin {
   final IconData iconeParaPrefixo;
   final String textoDeAjuda;
   final String mensagemDeErro;
+  final FocusNode focusNode;
   final Function funcaoDeCallbackParaAlteracao;
+  final Function funcaoDeCallbackParaSubmissaoDoText;
 
   const TextFieldWidget({
     this.iconeParaPrefixo,
     this.textoDeAjuda,
     this.mensagemDeErro = '',
     this.funcaoDeCallbackParaAlteracao,
+    this.funcaoDeCallbackParaSubmissaoDoText,
+    this.focusNode,
   });
 
   @override
@@ -31,6 +35,8 @@ class TextFieldWidget extends StatelessWidget with TextFieldWidgetMixin {
                 onChanged: (value) {
                   funcaoDeCallbackParaAlteracao([value]);
                 },
+                onSubmitted: (_) => funcaoDeCallbackParaSubmissaoDoText(),
+                focusNode: focusNode,
                 decoration: InputDecoration(
                   hintText: textoDeAjuda,
                   contentPadding: const EdgeInsets.only(

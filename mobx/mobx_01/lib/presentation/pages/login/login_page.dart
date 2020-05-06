@@ -9,6 +9,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> with LoginPageMixin {
+  final FocusNode _emailNode = FocusNode();
+  final FocusNode _senhaNode = FocusNode();
   String _email = '';
   String _senha = '';
 
@@ -24,6 +26,7 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextFieldWidget(
+              focusNode: _emailNode,
               funcaoDeCallbackParaSubmissaoDoText: () =>
                   FocusScope.of(context).nextFocus(),
               funcaoDeCallbackParaAlteracao: (newValue) {
@@ -40,6 +43,11 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
               height: 20,
             ),
             TextFieldWidget(
+              focusNode: _senhaNode,
+              funcaoDeCallbackParaSubmissaoDoText:
+                  (oFormularioEhValido(email: _email, senha: _senha))
+                      ? () async => navegaParaPaginaInicial()
+                      : () => FocusScope.of(context).previousFocus(),
               funcaoDeCallbackParaAlteracao: (newValue) {
                 setState(() {
                   _senha = newValue;
@@ -56,15 +64,19 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
             RaisedButton(
                 child: Text('Acessar'),
                 onPressed: (oFormularioEhValido(email: _email, senha: _senha))
-                    ? () async => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => HomePage(),
-                          ),
-                        )
+                    ? () async => navegaParaPaginaInicial()
                     : null), // _formSubmit),
           ],
         ),
+      ),
+    );
+  }
+
+  navegaParaPaginaInicial() async {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => HomePage(),
       ),
     );
   }
