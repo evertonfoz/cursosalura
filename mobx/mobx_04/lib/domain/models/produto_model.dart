@@ -5,11 +5,12 @@ class ProdutoModel {
   final String nome;
   final String descricao;
   final double valor;
+  final String urlImagem;
 
-  ProdutoModel({
-    @required this.produtoId,
-    @required this.nome,
-    @required this.descricao,
-    @required this.valor,
-  });
+  ProdutoModel(
+      {@required this.produtoId,
+      @required this.nome,
+      @required this.descricao,
+      @required this.valor,
+      this.urlImagem = 'assets/images/produtos/cardapio.jpg'});
 }
