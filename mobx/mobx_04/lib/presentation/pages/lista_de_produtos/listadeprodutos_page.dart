@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mobx04/data/datasources/produtos_datasource.dart';
 import 'package:mobx04/presentation/pages/home/mobx/home_page_store.dart';
-import 'package:mobx04/presentation/pages/home/widgets/listtile_para_produtos_widget.dart';
 import 'package:numberpicker/numberpicker.dart';
+
+import 'file:///C:/Users/Everton/Documents/GitHub/cursosalura/mobx/mobx_04/lib/presentation/pages/lista_de_produtos/widgets/listtile_para_produtos_widget.dart';
 
 class ListaDeProdutosPage extends StatelessWidget {
   final HomePageStore _homePageStore = GetIt.instance.get<HomePageStore>();
@@ -33,7 +34,7 @@ class ListaDeProdutosPage extends StatelessWidget {
               );
               if (quantidade != null)
                 _homePageStore.registrarProduto(
-                    valorProduto: listaDeProdutos[index].valor * quantidade);
+                    produto: listaDeProdutos[index], quantidade: quantidade);
             },
           );
         });

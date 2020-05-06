@@ -27,6 +27,7 @@ class TextFieldWidget extends StatelessWidget with TextFieldWidgetMixin {
                   alignment: Alignment.centerLeft,
                   child: Icon(iconeParaPrefixo)),
               TextField(
+                textInputAction: TextInputAction.next,
                 onChanged: (value) {
                   funcaoDeCallbackParaAlteracao(value);
                 },

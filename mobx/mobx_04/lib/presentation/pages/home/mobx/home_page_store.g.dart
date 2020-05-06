@@ -60,7 +60,7 @@ mixin _$HomePageStore on _HomePageStore, Store {
       Atom(name: '_HomePageStore.produtosSelecionados');
 
   @override
-  ObservableList<ProdutoModel> get produtosSelecionados {
+  ObservableList<ProdutoPedidoModel> get produtosSelecionados {
     _$produtosSelecionadosAtom.context
         .enforceReadPolicy(_$produtosSelecionadosAtom);
     _$produtosSelecionadosAtom.reportObserved();
@@ -68,7 +68,7 @@ mixin _$HomePageStore on _HomePageStore, Store {
   }
 
   @override
-  set produtosSelecionados(ObservableList<ProdutoModel> value) {
+  set produtosSelecionados(ObservableList<ProdutoPedidoModel> value) {
     _$produtosSelecionadosAtom.context.conditionallyRunInAction(() {
       super.produtosSelecionados = value;
       _$produtosSelecionadosAtom.reportChanged();
@@ -80,10 +80,10 @@ mixin _$HomePageStore on _HomePageStore, Store {
       ActionController(name: '_HomePageStore');
 
   @override
-  dynamic registrarProduto({double valorProduto}) {
+  dynamic registrarProduto({ProdutoModel produto, int quantidade}) {
     final _$actionInfo = _$_HomePageStoreActionController.startAction();
     try {
-      return super.registrarProduto(valorProduto: valorProduto);
+      return super.registrarProduto(produto: produto, quantidade: quantidade);
     } finally {
       _$_HomePageStoreActionController.endAction(_$actionInfo);
     }

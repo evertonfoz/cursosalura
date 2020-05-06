@@ -24,6 +24,8 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextFieldWidget(
+              funcaoDeCallbackParaSubmissaoDoText: () =>
+                  FocusScope.of(context).nextFocus(),
               funcaoDeCallbackParaAlteracao: (newValue) {
                 setState(() {
                   _email = newValue;

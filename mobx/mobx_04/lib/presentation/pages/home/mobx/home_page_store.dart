@@ -1,6 +1,7 @@
 import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
 import 'package:mobx04/domain/models/produto_model.dart';
+import 'package:mobx04/domain/models/produto_pedido_model.dart';
 
 part 'home_page_store.g.dart';
 
@@ -20,8 +21,8 @@ abstract class _HomePageStore with Store {
   int paginaAtual = 0;
 
   @observable
-  ObservableList<ProdutoModel> produtosSelecionados =
-      ObservableList<ProdutoModel>();
+  ObservableList<ProdutoPedidoModel> produtosSelecionados =
+      ObservableList<ProdutoPedidoModel>();
 
   @computed
   String get totalPedido => formatacaoMonetaria.format(_totalPedido);
@@ -31,8 +32,13 @@ abstract class _HomePageStore with Store {
       (paginaAtual == 0) ? 'Produtos' : 'Produtos selecionados';
 
   @action
-  registrarProduto({double valorProduto}) {
-    _totalPedido += valorProduto;
+  registrarProduto({ProdutoModel produto, int quantidade}) {
+    produtosSelecionados.add(ProdutoPedidoModel(
+      produto: produto,
+      quantidade: quantidade,
+      valor: produto.valor,
+    ));
+    _totalPedido += (produto.valor * quantidade);
   }
 
   @action
