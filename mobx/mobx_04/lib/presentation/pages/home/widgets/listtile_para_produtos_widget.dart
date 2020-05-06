@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:mobx04/domain/models/produto_model.dart';
-import 'package:numberpicker/numberpicker.dart';
 
 class ListTileParaProdutosWidget extends StatelessWidget {
   final ProdutoModel produtoModel;
+  final Function funcaoDeCallbackParaInserirProduto;
   final formatacaoMonetaria = NumberFormat.simpleCurrency();
 
-  ListTileParaProdutosWidget({@required this.produtoModel});
+  ListTileParaProdutosWidget({
+    @required this.produtoModel,
+    this.funcaoDeCallbackParaInserirProduto,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -53,22 +56,7 @@ class ListTileParaProdutosWidget extends StatelessWidget {
                 Icons.add,
                 size: 48,
               ),
-              onTap: () async {
-                int quantidade = await showDialog<int>(
-                  barrierDismissible: false,
-                  context: context,
-                  builder: (BuildContext context) {
-                    return NumberPickerDialog.integer(
-                      cancelWidget: Text('Cancelar'),
-                      confirmWidget: Text('Confirmar'),
-                      initialIntegerValue: 1,
-                      minValue: 1,
-                      maxValue: 10,
-                      title: new Text("Quantidade para o item"),
-                    );
-                  },
-                );
-              }),
+              onTap: funcaoDeCallbackParaInserirProduto),
         ],
       ),
     );

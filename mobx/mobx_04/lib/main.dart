@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:mobx04/presentation/pages/home/mobx/home_page_store.dart';
 
 import 'presentation/pages/login/login_page.dart';
 
 void main() {
+  GetIt.I.registerSingleton<HomePageStore>(HomePageStore());
   runApp(MyApp());
 }
 
@@ -11,6 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
