@@ -39,6 +39,7 @@ class LoginPage extends StatelessWidget with LoginPageMixin {
                 height: 20,
               ),
               TextFieldWidget(
+                textInputAction: TextInputAction.go,
                 focusNode: _senhaNode,
                 funcaoDeCallbackParaSubmissaoDoText: oFormularioEhValido(
                         email: _loginPageMobx.email.value,

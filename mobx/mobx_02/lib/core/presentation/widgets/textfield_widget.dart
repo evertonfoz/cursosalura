@@ -9,6 +9,7 @@ class TextFieldWidget extends StatelessWidget with TextFieldWidgetMixin {
   final FocusNode focusNode;
   final Function funcaoDeCallbackParaAlteracao;
   final Function funcaoDeCallbackParaSubmissaoDoText;
+  final TextInputAction textInputAction;
 
   const TextFieldWidget({
     this.iconeParaPrefixo,
@@ -17,6 +18,7 @@ class TextFieldWidget extends StatelessWidget with TextFieldWidgetMixin {
     this.funcaoDeCallbackParaAlteracao,
     this.funcaoDeCallbackParaSubmissaoDoText,
     this.focusNode,
+    this.textInputAction = TextInputAction.next,
   });
 
   @override
@@ -31,7 +33,7 @@ class TextFieldWidget extends StatelessWidget with TextFieldWidgetMixin {
                   alignment: Alignment.centerLeft,
                   child: Icon(iconeParaPrefixo)),
               TextField(
-                textInputAction: TextInputAction.next,
+                textInputAction: textInputAction,
                 onChanged: (value) {
                   funcaoDeCallbackParaAlteracao([value]);
                 },

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mobx04/data/datasources/produtos_datasource.dart';
+import 'package:mobx04/domain/models/produto_model.dart';
 import 'package:mobx04/presentation/pages/home/mobx/home_page_store.dart';
 import 'package:numberpicker/numberpicker.dart';
 
@@ -11,12 +12,13 @@ class ListaDeProdutosPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<ProdutoModel> produtos = listaDeProdutos();
     return ListView.builder(
         padding: EdgeInsets.symmetric(vertical: 8),
-        itemCount: listaDeProdutos.length,
+        itemCount: produtos.length,
         itemBuilder: (context, index) {
           return ListTileParaProdutosWidget(
-            produtoModel: listaDeProdutos[index],
+            produtoModel: produtos[index],
             funcaoDeCallbackParaInserirProduto: () async {
               int quantidade = await showDialog<int>(
                 barrierDismissible: false,
@@ -34,7 +36,7 @@ class ListaDeProdutosPage extends StatelessWidget {
               );
               if (quantidade != null)
                 _homePageStore.registrarProduto(
-                    produto: listaDeProdutos[index], quantidade: quantidade);
+                    produto: produtos[index], quantidade: quantidade);
             },
           );
         });

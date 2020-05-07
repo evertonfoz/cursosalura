@@ -8,6 +8,8 @@ import 'mixins/login_page_mixin.dart';
 
 class LoginPage extends StatelessWidget with LoginPageMixin {
   final _loginPageStore = LoginPageStore();
+  final FocusNode _emailNode = FocusNode();
+  final FocusNode _senhaNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
@@ -22,6 +24,9 @@ class LoginPage extends StatelessWidget with LoginPageMixin {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextFieldWidget(
+                focusNode: _emailNode,
+                funcaoDeCallbackParaSubmissaoDoText: () =>
+                    FocusScope.of(context).nextFocus(),
                 funcaoDeCallbackParaAlteracao: (newValue) =>
                     _loginPageStore.atualizarEmail(newValue: newValue),
                 iconeParaPrefixo: Icons.email,
@@ -34,6 +39,13 @@ class LoginPage extends StatelessWidget with LoginPageMixin {
                 height: 20,
               ),
               TextFieldWidget(
+                textInputAction: TextInputAction.go,
+                focusNode: _senhaNode,
+                funcaoDeCallbackParaSubmissaoDoText: oFormularioEhValido(
+                        email: _loginPageStore.email,
+                        senha: _loginPageStore.senha)
+                    ? () async => navegaParaPaginaInicial(context: context)
+                    : () => FocusScope.of(context).previousFocus(),
                 funcaoDeCallbackParaAlteracao: (newValue) =>
                     _loginPageStore.atualizarSenha(newValue: newValue),
                 iconeParaPrefixo: Icons.security,
@@ -60,6 +72,15 @@ class LoginPage extends StatelessWidget with LoginPageMixin {
             ],
           );
         }),
+      ),
+    );
+  }
+
+  navegaParaPaginaInicial({BuildContext context}) async {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => HomePage(),
       ),
     );
   }

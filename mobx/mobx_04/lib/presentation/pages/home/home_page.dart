@@ -34,7 +34,19 @@ class HomePage extends StatelessWidget {
             ),
           ],
         ),
-        body: _paginas[_homePageStore.paginaAtual],
+        body: Stack(
+          children: [
+            AbsorbPointer(child: _paginas[_homePageStore.paginaAtual]),
+            Positioned(
+              right: 0,
+              width: 250,
+              child: RaisedButton(
+                onPressed: () => print("Button 2"),
+                child: Text("Button 2"),
+              ),
+            ),
+          ],
+        ),
         bottomNavigationBar: BottomNavigationBar(
           currentIndex: _homePageStore.paginaAtual,
           onTap: (index) => _homePageStore.alternarPagina(novaPagina: index),

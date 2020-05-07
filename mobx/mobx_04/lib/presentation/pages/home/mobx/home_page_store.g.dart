@@ -21,6 +21,14 @@ mixin _$HomePageStore on _HomePageStore, Store {
   String get tituloHomePage => (_$tituloHomePageComputed ??=
           Computed<String>(() => super.tituloHomePage))
       .value;
+  Computed<ObservableList<ProdutoPedidoStore>> _$produtosSelecionadosComputed;
+
+  @override
+  ObservableList<ProdutoPedidoStore> get produtosSelecionados =>
+      (_$produtosSelecionadosComputed ??=
+              Computed<ObservableList<ProdutoPedidoStore>>(
+                  () => super.produtosSelecionados))
+          .value;
 
   final _$_totalPedidoAtom = Atom(name: '_HomePageStore._totalPedido');
 
@@ -56,26 +64,6 @@ mixin _$HomePageStore on _HomePageStore, Store {
     }, _$paginaAtualAtom, name: '${_$paginaAtualAtom.name}_set');
   }
 
-  final _$produtosSelecionadosAtom =
-      Atom(name: '_HomePageStore.produtosSelecionados');
-
-  @override
-  ObservableList<ProdutoPedidoModel> get produtosSelecionados {
-    _$produtosSelecionadosAtom.context
-        .enforceReadPolicy(_$produtosSelecionadosAtom);
-    _$produtosSelecionadosAtom.reportObserved();
-    return super.produtosSelecionados;
-  }
-
-  @override
-  set produtosSelecionados(ObservableList<ProdutoPedidoModel> value) {
-    _$produtosSelecionadosAtom.context.conditionallyRunInAction(() {
-      super.produtosSelecionados = value;
-      _$produtosSelecionadosAtom.reportChanged();
-    }, _$produtosSelecionadosAtom,
-        name: '${_$produtosSelecionadosAtom.name}_set');
-  }
-
   final _$_HomePageStoreActionController =
       ActionController(name: '_HomePageStore');
 
@@ -100,9 +88,40 @@ mixin _$HomePageStore on _HomePageStore, Store {
   }
 
   @override
+  dynamic incrementarValorProdutoAdicionado({double valor}) {
+    final _$actionInfo = _$_HomePageStoreActionController.startAction();
+    try {
+      return super.incrementarValorProdutoAdicionado(valor: valor);
+    } finally {
+      _$_HomePageStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic decrementarValorProdutoRetirado({double valor}) {
+    final _$actionInfo = _$_HomePageStoreActionController.startAction();
+    try {
+      return super.decrementarValorProdutoRetirado(valor: valor);
+    } finally {
+      _$_HomePageStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic retirarProdutoDoPedido({ProdutoPedidoStore produtoPedidoStore}) {
+    final _$actionInfo = _$_HomePageStoreActionController.startAction();
+    try {
+      return super
+          .retirarProdutoDoPedido(produtoPedidoStore: produtoPedidoStore);
+    } finally {
+      _$_HomePageStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     final string =
-        'paginaAtual: ${paginaAtual.toString()},produtosSelecionados: ${produtosSelecionados.toString()},totalPedido: ${totalPedido.toString()},tituloHomePage: ${tituloHomePage.toString()}';
+        'paginaAtual: ${paginaAtual.toString()},totalPedido: ${totalPedido.toString()},tituloHomePage: ${tituloHomePage.toString()},produtosSelecionados: ${produtosSelecionados.toString()}';
     return '{$string}';
   }
 }

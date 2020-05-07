@@ -3,7 +3,7 @@ import 'package:mobx04/domain/models/produto_model.dart';
 
 class ProdutoPedidoModel {
   final ProdutoModel produto;
-  final int quantidade;
+  int quantidade;
   final double valor;
 
   ProdutoPedidoModel({

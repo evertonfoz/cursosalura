@@ -44,6 +44,7 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
             ),
             TextFieldWidget(
               focusNode: _senhaNode,
+              textInputAction: TextInputAction.go,
               funcaoDeCallbackParaSubmissaoDoText:
                   (oFormularioEhValido(email: _email, senha: _senha))
                       ? () async => navegaParaPaginaInicial()

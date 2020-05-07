@@ -1,6 +1,6 @@
 import 'package:mobx04/domain/models/produto_model.dart';
 
-List<ProdutoModel> listaDeProdutos = [
+List<ProdutoModel> _listaDeProdutos = [
   ProdutoModel(
       produtoId: 1,
       nome: 'Suco de Laranja',
@@ -32,3 +32,10 @@ List<ProdutoModel> listaDeProdutos = [
       valor: 10,
       urlImagem: 'assets/images/produtos/cheeseburguer.jpg'),
 ];
+
+List<ProdutoModel> listaDeProdutos() {
+  _listaDeProdutos
+      .sort((a, b) => a.nome.toLowerCase().compareTo(b.nome.toLowerCase()));
+  List<ProdutoModel> _unmodifiabileList = List.unmodifiable(_listaDeProdutos);
+  return _unmodifiabileList;
+}
