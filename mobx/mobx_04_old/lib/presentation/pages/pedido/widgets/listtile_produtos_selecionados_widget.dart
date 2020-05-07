@@ -163,7 +163,8 @@ class ListTileParaProdutosSelecionadosWidget extends StatelessWidget {
                   );
                   if (oQueFazer == 'Não') return false;
 
-                  produtoPedidoStore.homePageStore.retirarProdutoDoPedido(produtoPedidoStore: produtoPedidoStore);
+                  produtoPedidoStore.homePageStore.retirarProdutoDoPedido(
+                      produtoPedidoStore: produtoPedidoStore);
                   return true;
                 },
               ),

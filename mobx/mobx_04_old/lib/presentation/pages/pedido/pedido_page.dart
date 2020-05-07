@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mobx04/presentation/pages/home/mobx/home_page_store.dart';
-import 'package:mobx04/presentation/pages/pedido/widgets/listtile_produtos_selecionados_widget.dart';
+
+import 'widgets/listtile_produtos_selecionados_widget.dart';
 
 class PedidoPage extends StatelessWidget {
   final HomePageStore _homePageStore = GetIt.instance.get<HomePageStore>();

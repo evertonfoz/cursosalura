@@ -1,53 +1,30 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
-import 'package:mobx04/presentation/pages/home/mobx/home_page_store.dart';
 import 'package:mobx04/presentation/pages/lista_de_produtos/listadeprodutos_page.dart';
-import 'package:mobx04/presentation/pages/pedido/pedido_page.dart';
+import 'package:mobx04/presentation/pages/produtos_selecionados/produtos_selecionados_page.dart';
+
+import 'mobx/home_page_store.dart';
 
 class HomePage extends StatelessWidget {
   final HomePageStore _homePageStore = GetIt.instance.get<HomePageStore>();
   final List<Widget> _paginas = [
     ListaDeProdutosPage(),
-    PedidoPage(),
+    ProdutosSelecionadosPage(),
   ];
   @override
   Widget build(BuildContext context) {
-    return Observer(builder: (_) {
-      return Scaffold(
-        appBar: AppBar(
-          title: Text(_homePageStore.tituloHomePage),
-          actions: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text('Total Pedido:'),
-                Text(
-                  '${_homePageStore.totalPedido}',
-                  style: TextStyle(
-                    color: Colors.yellowAccent,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-        body: Stack(
-          children: [
-            AbsorbPointer(child: _paginas[_homePageStore.paginaAtual]),
-            Positioned(
-              right: 0,
-              width: 250,
-              child: RaisedButton(
-                onPressed: () => print("Button 2"),
-                child: Text("Button 2"),
-              ),
-            ),
-          ],
-        ),
-        bottomNavigationBar: BottomNavigationBar(
+    return Scaffold(
+      appBar: AppBar(
+        title: Observer(builder: (_) {
+          return Text(_homePageStore.tituloHomePage);
+        }),
+      ),
+      body: Observer(builder: (_) {
+        return _paginas[_homePageStore.paginaAtual];
+      }),
+      bottomNavigationBar: Observer(builder: (_) {
+        return BottomNavigationBar(
           currentIndex: _homePageStore.paginaAtual,
           onTap: (index) => _homePageStore.alternarPagina(novaPagina: index),
           items: [
@@ -66,8 +43,8 @@ class HomePage extends StatelessWidget {
               title: new Text('Pedido'),
             ),
           ],
-        ),
-      );
-    });
+        );
+      }),
+    );
   }
 }
