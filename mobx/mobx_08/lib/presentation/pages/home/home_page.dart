@@ -3,24 +3,58 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mobx08/presentation/mixins/presentation_mixin.dart';
 import 'package:mobx08/presentation/pages/home/shared_preferences/orientacao_total_pedido_preferences.dart';
+import 'package:mobx08/presentation/pages/home/widgets/arrow_widget.dart';
 import 'package:mobx08/presentation/pages/home/widgets/clippy_widget.dart';
 import 'package:mobx08/presentation/pages/lista_de_produtos/lista_de_produtos_page.dart';
 import 'package:mobx08/presentation/pages/produtos_selecionados/produtos_selecionados_page.dart';
 
 import 'mobx/home_page_store.dart';
 
-class HomePage extends StatelessWidget with PresentationMixin {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage>
+    with PresentationMixin, SingleTickerProviderStateMixin {
   final HomePageStore _homePageStore = GetIt.instance.get<HomePageStore>();
+
   final List<Widget> _paginas = [
     ListaDeProdutosPage(),
     ProdutosSelecionadosPage(),
   ];
+
+  Animation<double> animation;
+  AnimationController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller =
+        AnimationController(duration: const Duration(seconds: 3), vsync: this);
+    animation = Tween<double>(begin: 0, end: 300).animate(controller)
+      ..addListener(() {
+        setState(() {});
+      });
+    controller.forward();
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Observer(builder: (_) {
-          return Text(_homePageStore.tituloHomePage);
+          return _homePageStore.orientacaoJaLida
+              ? Text(_homePageStore.tituloHomePage)
+              : ArrowWidget(
+                  esquerda: animation.value,
+                );
         }),
         actions: [
           Column(
