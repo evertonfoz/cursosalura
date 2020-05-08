@@ -4,7 +4,7 @@ import 'package:mobx05/data/datasources/produtos_datasource.dart' as datasource;
 import 'package:mobx05/domain/models/produto_model.dart';
 import 'package:mobx05/presentation/pages/home/mobx/home_page_store.dart';
 
-import 'widgets/listtile_para_produtos_widget.dart';
+import 'widgets/listtile_para_lista_de_produtos_widget.dart';
 
 class ListaDeProdutosPage extends StatelessWidget {
   final HomePageStore _homePageStore = GetIt.instance.get<HomePageStore>();
@@ -16,7 +16,8 @@ class ListaDeProdutosPage extends StatelessWidget {
         padding: EdgeInsets.symmetric(vertical: 8),
         itemCount: produtos.length,
         itemBuilder: (context, index) {
-          return ListTileParaProdutosWidget(produtoModel: produtos[index]);
+          return ListTileParaListaDeProdutosWidget(
+              produtoModel: produtos[index]);
         });
   }
 }

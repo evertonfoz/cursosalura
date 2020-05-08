@@ -3,13 +3,15 @@ import 'package:intl/intl.dart';
 import 'package:mobx06/domain/models/produto_model.dart';
 import 'package:mobx06/presentation/mixins/presentation_mixin.dart';
 
-class ListTileParaProdutosWidget extends StatelessWidget
+class ListTileParaListaDeProdutosWidget extends StatelessWidget
     with PresentationMixin {
   final ProdutoModel produtoModel;
+  final Function funcaoDeCallbackParaInserirProduto;
   final formatacaoMonetaria = NumberFormat.simpleCurrency();
 
-  ListTileParaProdutosWidget({
+  ListTileParaListaDeProdutosWidget({
     @required this.produtoModel,
+    this.funcaoDeCallbackParaInserirProduto,
   });
 
   @override
@@ -39,11 +41,12 @@ class ListTileParaProdutosWidget extends StatelessWidget
       trailing: Column(
         children: [
           InkWell(
-              child: Icon(
-                Icons.add,
-                size: 48,
-              ),
-              onTap: () {}),
+            child: Icon(
+              Icons.add,
+              size: 48,
+            ),
+            onTap: funcaoDeCallbackParaInserirProduto,
+          ),
         ],
       ),
     );

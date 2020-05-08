@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mobx06/presentation/mixins/presentation_mixin.dart';
-import 'package:mobx06/presentation/pages/lista_de_produtos/listadeprodutos_page.dart';
+import 'package:mobx06/presentation/pages/lista_de_produtos/lista_de_produtos_page.dart';
 import 'package:mobx06/presentation/pages/produtos_selecionados/produtos_selecionados_page.dart';
 
 import 'mobx/home_page_store.dart';
@@ -25,10 +25,14 @@ class HomePage extends StatelessWidget with PresentationMixin {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text('Total Pedido:'),
-              gerarText(
-                texto: _homePageStore.totalPedido,
-                negrito: true,
-                cor: Colors.yellowAccent,
+              Observer(
+                builder: (_) {
+                  return gerarText(
+                    texto: _homePageStore.totalPedido,
+                    negrito: true,
+                    cor: Colors.yellowAccent,
+                  );
+                },
               ),
             ],
           ),
