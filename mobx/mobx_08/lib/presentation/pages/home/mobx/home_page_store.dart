@@ -1,6 +1,6 @@
 import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
-import 'package:mobx07/domain/models/produto_model.dart';
+import 'package:mobx08/domain/models/produto_model.dart';
 
 part 'home_page_store.g.dart';
 
