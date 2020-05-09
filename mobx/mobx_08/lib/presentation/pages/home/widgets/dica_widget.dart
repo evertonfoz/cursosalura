@@ -1,12 +1,12 @@
 import 'package:clippy_flutter/clippy_flutter.dart';
 import 'package:flutter/material.dart';
 
-class ClippyWidget extends StatelessWidget {
+class DicaWidget extends StatelessWidget {
   final double messageBoxWidth = 200.0;
   final double messageBoxHeight = 120.0;
   final Function funcaoParaRegistrarLeituraOrientacao;
 
-  ClippyWidget({this.funcaoParaRegistrarLeituraOrientacao});
+  DicaWidget({this.funcaoParaRegistrarLeituraOrientacao});
 
   @override
   Widget build(BuildContext context) {
