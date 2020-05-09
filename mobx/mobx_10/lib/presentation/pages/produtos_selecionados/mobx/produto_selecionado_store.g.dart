@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'produtos_selecionados_store.dart';
+part of 'produto_selecionado_store.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,19 +8,9 @@ part of 'produtos_selecionados_store.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$ProdutosSelecionadosStore on _ProdutosSelecionadosStore, Store {
-  Computed<ObservableList<ProdutoSelecionadoStore>>
-      _$produtosSelecionadosComputed;
-
-  @override
-  ObservableList<ProdutoSelecionadoStore> get produtosSelecionados =>
-      (_$produtosSelecionadosComputed ??=
-              Computed<ObservableList<ProdutoSelecionadoStore>>(
-                  () => super.produtosSelecionados))
-          .value;
-
+mixin _$ProdutoSelecionadoStore on _ProdutoSelecionadoStore, Store {
   final _$produtoModelAtom =
-      Atom(name: '_ProdutosSelecionadosStore.produtoModel');
+      Atom(name: '_ProdutoSelecionadoStore.produtoModel');
 
   @override
   ProdutoModel get produtoModel {
@@ -37,7 +27,7 @@ mixin _$ProdutosSelecionadosStore on _ProdutosSelecionadosStore, Store {
     }, _$produtoModelAtom, name: '${_$produtoModelAtom.name}_set');
   }
 
-  final _$quantidadeAtom = Atom(name: '_ProdutosSelecionadosStore.quantidade');
+  final _$quantidadeAtom = Atom(name: '_ProdutoSelecionadoStore.quantidade');
 
   @override
   int get quantidade {
@@ -54,35 +44,24 @@ mixin _$ProdutosSelecionadosStore on _ProdutosSelecionadosStore, Store {
     }, _$quantidadeAtom, name: '${_$quantidadeAtom.name}_set');
   }
 
-  final _$_ProdutosSelecionadosStoreActionController =
-      ActionController(name: '_ProdutosSelecionadosStore');
-
-  @override
-  dynamic registrarProduto({ProdutoModel produto, int quantidade}) {
-    final _$actionInfo =
-        _$_ProdutosSelecionadosStoreActionController.startAction();
-    try {
-      return super.registrarProduto(produto: produto, quantidade: quantidade);
-    } finally {
-      _$_ProdutosSelecionadosStoreActionController.endAction(_$actionInfo);
-    }
-  }
+  final _$_ProdutoSelecionadoStoreActionController =
+      ActionController(name: '_ProdutoSelecionadoStore');
 
   @override
   dynamic adicionarQuantidade() {
     final _$actionInfo =
-        _$_ProdutosSelecionadosStoreActionController.startAction();
+        _$_ProdutoSelecionadoStoreActionController.startAction();
     try {
       return super.adicionarQuantidade();
     } finally {
-      _$_ProdutosSelecionadosStoreActionController.endAction(_$actionInfo);
+      _$_ProdutoSelecionadoStoreActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   String toString() {
     final string =
-        'produtoModel: ${produtoModel.toString()},quantidade: ${quantidade.toString()},produtosSelecionados: ${produtosSelecionados.toString()}';
+        'produtoModel: ${produtoModel.toString()},quantidade: ${quantidade.toString()}';
     return '{$string}';
   }
 }

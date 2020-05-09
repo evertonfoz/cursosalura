@@ -49,4 +49,9 @@ abstract class _HomePageStore with Store {
   registrarLeituraOrientacao() {
     orientacaoJaLida = true;
   }
+
+  @action
+  incrementarValorProdutoAdicionado({double valor}) {
+    _totalPedido += valor;
+  }
 }

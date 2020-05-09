@@ -1,7 +1,9 @@
+import 'package:get_it/get_it.dart';
 import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
 import 'package:mobx10/domain/models/produto_model.dart';
-import 'package:mobx10/domain/models/produto_pedido_model.dart';
+import 'package:mobx10/presentation/pages/home/mobx/home_page_store.dart';
+import 'package:mobx10/presentation/pages/produtos_selecionados/mobx/produto_selecionado_store.dart';
 
 part 'produtos_selecionados_store.g.dart';
 
@@ -15,11 +17,17 @@ class ProdutosSelecionadosStore = _ProdutosSelecionadosStore
 abstract class _ProdutosSelecionadosStore with Store {
   final formatacaoMonetaria = NumberFormat.simpleCurrency();
 
-  ObservableList<ProdutoPedidoModel> _produtosSelecionados =
-      ObservableList<ProdutoPedidoModel>();
+  @observable
+  ProdutoModel produtoModel;
+
+  @observable
+  int quantidade;
+
+  ObservableList<ProdutoSelecionadoStore> _produtosSelecionados =
+      ObservableList<ProdutoSelecionadoStore>();
 
   @computed
-  ObservableList<ProdutoPedidoModel> get produtosSelecionados {
+  ObservableList<ProdutoSelecionadoStore> get produtosSelecionados {
     _produtosSelecionados.sort((a, b) => a.produtoModel.nome
         .toLowerCase()
         .compareTo(b.produtoModel.nome.toLowerCase()));
@@ -29,7 +37,15 @@ abstract class _ProdutosSelecionadosStore with Store {
   @action
   registrarProduto({ProdutoModel produto, int quantidade}) {
     _produtosSelecionados.add(
-      ProdutoPedidoModel(produtoModel: produto, quantidade: quantidade),
+      ProdutoSelecionadoStore(produtoModel: produto, quantidade: quantidade),
     );
+  }
+
+  @action
+  adicionarQuantidade() {
+    final HomePageStore _homePageStore = GetIt.instance.get<HomePageStore>();
+
+    quantidade++;
+    _homePageStore.incrementarValorProdutoAdicionado(valor: produtoModel.valor);
   }
 }

@@ -17,7 +17,7 @@ class ProdutosSelecionadosPage extends StatelessWidget {
           itemCount: _produtosSelecionadosStore.produtosSelecionados.length,
           itemBuilder: (context, index) {
             return ListTileParaProdutosSelecionadosWidget(
-              produtoPedidoModel:
+              produtoSelecionadoStore:
                   _produtosSelecionadosStore.produtosSelecionados[index],
             );
           });
