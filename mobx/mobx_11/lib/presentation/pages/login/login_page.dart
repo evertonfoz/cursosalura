@@ -24,6 +24,7 @@ class LoginPage extends StatelessWidget with LoginPageMixin {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextFieldWidget(
+                keyboardType: TextInputType.emailAddress,
                 focusNode: _emailNode,
                 funcaoDeCallbackParaSubmissaoDoText: () =>
                     FocusScope.of(context).nextFocus(),
@@ -39,6 +40,7 @@ class LoginPage extends StatelessWidget with LoginPageMixin {
                 height: 20,
               ),
               TextFieldWidget(
+                obscureText: true,
                 textInputAction: TextInputAction.go,
                 focusNode: _senhaNode,
                 funcaoDeCallbackParaSubmissaoDoText: oFormularioEhValido(

@@ -11,6 +11,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> with LoginPageMixin {
   final FocusNode _emailNode = FocusNode();
   final FocusNode _senhaNode = FocusNode();
+
   String _email = '';
   String _senha = '';
 
@@ -18,7 +19,7 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('MobX Course - Alura'),
+        title: Text('Alura - Curso de MobX'),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -26,6 +27,7 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextFieldWidget(
+              keyboardType: TextInputType.emailAddress,
               focusNode: _emailNode,
               funcaoDeCallbackParaSubmissaoDoText: () =>
                   FocusScope.of(context).nextFocus(),
@@ -36,13 +38,15 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
               },
               iconeParaPrefixo: Icons.email,
               textoDeAjuda: 'Informe o email',
-              mensagemDeErro:
-                  !oEmailEhValido(email: _email) ? 'O email é obrigatório' : '',
+              mensagemDeErro: !oEmailEhValido(email: _email)
+                  ? 'Um email correto é obrigatório'
+                  : '',
             ),
             SizedBox(
-              height: 20,
+              height: 10,
             ),
             TextFieldWidget(
+              obscureText: true,
               focusNode: _senhaNode,
               textInputAction: TextInputAction.go,
               funcaoDeCallbackParaSubmissaoDoText:
