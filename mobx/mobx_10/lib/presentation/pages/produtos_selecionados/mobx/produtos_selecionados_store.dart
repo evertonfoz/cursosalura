@@ -48,4 +48,16 @@ abstract class _ProdutosSelecionadosStore with Store {
     quantidade++;
     _homePageStore.incrementarValorProdutoAdicionado(valor: produtoModel.valor);
   }
+
+  @action
+  retirarProduto({ProdutoSelecionadoStore produtoSelecionadoStore}) {
+    final HomePageStore _homePageStore = GetIt.instance.get<HomePageStore>();
+
+    _homePageStore.decrementarValorProdutoRetirado(
+        valor: produtoSelecionadoStore.quantidade *
+            produtoSelecionadoStore.produtoModel.valor);
+    _produtosSelecionados.removeWhere((produto) =>
+        produto.produtoModel.produtoId ==
+        produtoSelecionadoStore.produtoModel.produtoId);
+  }
 }

@@ -59,6 +59,17 @@ mixin _$ProdutoSelecionadoStore on _ProdutoSelecionadoStore, Store {
   }
 
   @override
+  dynamic retirarQuantidade() {
+    final _$actionInfo =
+        _$_ProdutoSelecionadoStoreActionController.startAction();
+    try {
+      return super.retirarQuantidade();
+    } finally {
+      _$_ProdutoSelecionadoStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     final string =
         'produtoModel: ${produtoModel.toString()},quantidade: ${quantidade.toString()}';

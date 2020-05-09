@@ -117,6 +117,16 @@ mixin _$HomePageStore on _HomePageStore, Store {
   }
 
   @override
+  dynamic decrementarValorProdutoRetirado({double valor}) {
+    final _$actionInfo = _$_HomePageStoreActionController.startAction();
+    try {
+      return super.decrementarValorProdutoRetirado(valor: valor);
+    } finally {
+      _$_HomePageStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     final string =
         'paginaAtual: ${paginaAtual.toString()},orientacaoJaLida: ${orientacaoJaLida.toString()},tituloHomePage: ${tituloHomePage.toString()},totalPedido: ${totalPedido.toString()}';

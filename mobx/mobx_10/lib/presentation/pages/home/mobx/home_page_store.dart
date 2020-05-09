@@ -54,4 +54,9 @@ abstract class _HomePageStore with Store {
   incrementarValorProdutoAdicionado({double valor}) {
     _totalPedido += valor;
   }
+
+  @action
+  decrementarValorProdutoRetirado({double valor}) {
+    _totalPedido -= valor;
+  }
 }

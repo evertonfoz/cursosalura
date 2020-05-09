@@ -33,4 +33,10 @@ abstract class _ProdutoSelecionadoStore with Store {
     quantidade++;
     _homePageStore.incrementarValorProdutoAdicionado(valor: produtoModel.valor);
   }
+
+  @action
+  retirarQuantidade() {
+    quantidade--;
+    _homePageStore.decrementarValorProdutoRetirado(valor: produtoModel.valor);
+  }
 }
