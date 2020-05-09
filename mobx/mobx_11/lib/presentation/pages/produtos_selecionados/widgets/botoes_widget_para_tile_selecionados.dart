@@ -35,12 +35,26 @@ class BotoesWidgetParaTileSelecionados extends StatelessWidget
             size: 38,
           ),
           onTap: () {
-            produtoSelecionadoStore.retirarQuantidade();
+            String mensagemParaSnackBar;
+            Color corParaSnackBar;
+            if (produtoSelecionadoStore.quantidade == 1) {
+              final ProdutosSelecionadosStore _produtosSelecionadosStore =
+                  GetIt.instance.get<ProdutosSelecionadosStore>();
+              _produtosSelecionadosStore.retirarProduto(
+                  produtoSelecionadoStore: produtoSelecionadoStore);
+              mensagemParaSnackBar =
+                  'O produto ${produtoSelecionadoStore.produtoModel.nome.toUpperCase()} foi retirado da seleção';
+              corParaSnackBar = Colors.red;
+            } else {
+              produtoSelecionadoStore.retirarQuantidade();
+              mensagemParaSnackBar =
+                  'Decrementada a quantidade para ${produtoSelecionadoStore.produtoModel.nome.toUpperCase()}';
+              corParaSnackBar = Colors.yellowAccent;
+            }
             _showSnackBar(
                 context: context,
-                texto:
-                    'Decrementada a quantidade para ${produtoSelecionadoStore.produtoModel.nome.toUpperCase()}',
-                cor: Colors.yellowAccent,
+                texto: mensagemParaSnackBar,
+                cor: corParaSnackBar,
                 corParaTexto: Colors.blue[900]);
           },
         ),
