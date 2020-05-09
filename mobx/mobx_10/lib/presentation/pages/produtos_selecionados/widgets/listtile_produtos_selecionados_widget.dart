@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:mobx09/domain/models/produto_pedido_model.dart';
-import 'package:mobx09/presentation/mixins/presentation_mixin.dart';
+import 'package:mobx10/domain/models/produto_pedido_model.dart';
+import 'package:mobx10/presentation/mixins/presentation_mixin.dart';
 
 import 'botoes_widget_para_tile_selecionados.dart';
 import 'nome_descricao_widget_para_tile_selecionados.dart';
