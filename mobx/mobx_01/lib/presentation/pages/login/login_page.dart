@@ -51,7 +51,7 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
               textInputAction: TextInputAction.go,
               funcaoDeCallbackParaSubmissaoDoText:
                   (oFormularioEhValido(email: _email, senha: _senha))
-                      ? () async => navegaParaPaginaInicial()
+                      ? () async => _navegaParaPaginaInicial()
                       : () => FocusScope.of(context).previousFocus(),
               funcaoDeCallbackParaAlteracao: (newValue) {
                 setState(() {
@@ -69,7 +69,7 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
             RaisedButton(
                 child: Text('Acessar'),
                 onPressed: (oFormularioEhValido(email: _email, senha: _senha))
-                    ? () async => navegaParaPaginaInicial()
+                    ? () async => _navegaParaPaginaInicial()
                     : null), // _formSubmit),
           ],
         ),
@@ -77,7 +77,7 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
     );
   }
 
-  navegaParaPaginaInicial() async {
+  _navegaParaPaginaInicial() async {
     Navigator.push(
       context,
       MaterialPageRoute(

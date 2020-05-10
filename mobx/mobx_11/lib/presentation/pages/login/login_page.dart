@@ -15,7 +15,7 @@ class LoginPage extends StatelessWidget with LoginPageMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('MobX Course - Alura'),
+        title: Text('Alura - Curso de MobX'),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -33,7 +33,7 @@ class LoginPage extends StatelessWidget with LoginPageMixin {
                 iconeParaPrefixo: Icons.email,
                 textoDeAjuda: 'Informe o email',
                 mensagemDeErro: !oEmailEhValido(email: _loginPageStore.email)
-                    ? 'O email é obrigatório'
+                    ? 'Um email correto é obrigatório'
                     : '',
               ),
               SizedBox(
@@ -46,7 +46,7 @@ class LoginPage extends StatelessWidget with LoginPageMixin {
                 funcaoDeCallbackParaSubmissaoDoText: oFormularioEhValido(
                         email: _loginPageStore.email,
                         senha: _loginPageStore.senha)
-                    ? () async => navegaParaPaginaInicial(context: context)
+                    ? () async => _navegaParaPaginaInicial(context: context)
                     : () => FocusScope.of(context).previousFocus(),
                 funcaoDeCallbackParaAlteracao: (newValue) =>
                     _loginPageStore.atualizarSenha(newValue: newValue),
@@ -78,7 +78,7 @@ class LoginPage extends StatelessWidget with LoginPageMixin {
     );
   }
 
-  navegaParaPaginaInicial({BuildContext context}) async {
+  _navegaParaPaginaInicial({BuildContext context}) async {
     Navigator.push(
       context,
       MaterialPageRoute(
