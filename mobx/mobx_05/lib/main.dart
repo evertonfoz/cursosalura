@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
+import 'presentation/pages/home/home_page.dart';
 import 'presentation/pages/home/mobx/home_page_store.dart';
-import 'presentation/pages/login/login_page.dart';
 
 void main() {
   GetIt.I.registerSingleton<HomePageStore>(HomePageStore());
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
           textTheme: ButtonTextTheme.primary,
         ),
       ),
-      home: LoginPage(),
+      home: HomePage(),
     );
   }
 }
