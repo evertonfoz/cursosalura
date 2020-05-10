@@ -70,10 +70,10 @@ mixin _$HomePageStore on _HomePageStore, Store {
   }
 
   @override
-  dynamic registrarProduto({ProdutoModel produto, int quantidade}) {
+  dynamic somarAoTotalDoPedido({double valor}) {
     final _$actionInfo = _$_HomePageStoreActionController.startAction();
     try {
-      return super.registrarProduto(produto: produto, quantidade: quantidade);
+      return super.somarAoTotalDoPedido(valor: valor);
     } finally {
       _$_HomePageStoreActionController.endAction(_$actionInfo);
     }
