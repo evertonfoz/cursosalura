@@ -1,6 +1,5 @@
 import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
-import 'package:mobx08/domain/models/produto_model.dart';
 
 part 'home_page_store.g.dart';
 
@@ -35,8 +34,8 @@ abstract class _HomePageStore with Store {
   }
 
   @action
-  registrarProduto({ProdutoModel produto, int quantidade}) {
-    _totalPedido += (produto.valor * quantidade);
+  somarAoTotalDoPedido({double valor}) {
+    _totalPedido += valor;
   }
 
   @action

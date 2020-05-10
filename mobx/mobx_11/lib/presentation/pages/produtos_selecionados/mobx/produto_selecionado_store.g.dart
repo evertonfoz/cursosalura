@@ -48,11 +48,11 @@ mixin _$ProdutoSelecionadoStore on _ProdutoSelecionadoStore, Store {
       ActionController(name: '_ProdutoSelecionadoStore');
 
   @override
-  dynamic adicionarQuantidade({int novaQuantidade = 1}) {
+  dynamic adicionarQuantidade() {
     final _$actionInfo =
         _$_ProdutoSelecionadoStoreActionController.startAction();
     try {
-      return super.adicionarQuantidade(novaQuantidade: novaQuantidade);
+      return super.adicionarQuantidade();
     } finally {
       _$_ProdutoSelecionadoStoreActionController.endAction(_$actionInfo);
     }

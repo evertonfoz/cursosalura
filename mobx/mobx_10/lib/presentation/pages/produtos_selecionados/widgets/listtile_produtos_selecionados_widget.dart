@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/intl.dart';
-import 'package:mobx10/presentation/mixins/presentation_mixin.dart';
-import 'package:mobx10/presentation/pages/produtos_selecionados/mobx/produto_selecionado_store.dart';
+import 'package:mobx09/domain/models/produto_pedido_model.dart';
+import 'package:mobx09/presentation/mixins/presentation_mixin.dart';
 
 import 'botoes_widget_para_tile_selecionados.dart';
 import 'nome_descricao_widget_para_tile_selecionados.dart';
@@ -12,10 +11,10 @@ import 'valores_widget_para_tile_selecionados.dart';
 class ListTileParaProdutosSelecionadosWidget extends StatelessWidget
     with PresentationMixin {
   final formatacaoMonetaria = NumberFormat.simpleCurrency();
-  final ProdutoSelecionadoStore produtoSelecionadoStore;
+  final ProdutoPedidoModel produtoPedidoModel;
 
   ListTileParaProdutosSelecionadosWidget({
-    @required this.produtoSelecionadoStore,
+    @required this.produtoPedidoModel,
   });
 
   @override
@@ -29,23 +28,19 @@ class ListTileParaProdutosSelecionadosWidget extends StatelessWidget
               CircleAvatar(
                 radius: 25,
                 backgroundImage:
-                    AssetImage(produtoSelecionadoStore.produtoModel.urlImagem),
+                    AssetImage(produtoPedidoModel.produtoModel.urlImagem),
               ),
               NomeDescricaoWidgetParaTileSelecionados(
-                nome: produtoSelecionadoStore.produtoModel.nome,
-                descricao: produtoSelecionadoStore.produtoModel.descricao,
+                nome: produtoPedidoModel.produtoModel.nome,
+                descricao: produtoPedidoModel.produtoModel.descricao,
               ),
             ],
           ),
-          Observer(builder: (_) {
-            return ValoresWidgetParaTileSelecionados(
-              quantidade: produtoSelecionadoStore.quantidade,
-              valor: produtoSelecionadoStore.produtoModel.valor,
-            );
-          }),
-          BotoesWidgetParaTileSelecionados(
-            produtoSelecionadoStore: produtoSelecionadoStore,
+          ValoresWidgetParaTileSelecionados(
+            quantidade: produtoPedidoModel.quantidade,
+            valor: produtoPedidoModel.produtoModel.valor,
           ),
+          BotoesWidgetParaTileSelecionados(),
           Divider(
             height: 5,
           )

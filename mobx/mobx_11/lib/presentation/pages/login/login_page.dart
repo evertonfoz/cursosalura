@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:mobx11/core/presentation/widgets/textfield_widget.dart';
-import 'package:mobx11/presentation/pages/home/home_page.dart';
+import 'package:mobx10/core/presentation/widgets/textfield_widget.dart';
+import 'package:mobx10/presentation/pages/home/home_page.dart';
 
 import 'mixins/login_page_mixin.dart';
 import 'mobx/login_page_store.dart';
@@ -15,7 +15,7 @@ class LoginPage extends StatelessWidget with LoginPageMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Alura - Curso de MobX'),
+        title: Text('MobX Course - Alura'),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -24,7 +24,6 @@ class LoginPage extends StatelessWidget with LoginPageMixin {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextFieldWidget(
-                keyboardType: TextInputType.emailAddress,
                 focusNode: _emailNode,
                 funcaoDeCallbackParaSubmissaoDoText: () =>
                     FocusScope.of(context).nextFocus(),
@@ -33,20 +32,19 @@ class LoginPage extends StatelessWidget with LoginPageMixin {
                 iconeParaPrefixo: Icons.email,
                 textoDeAjuda: 'Informe o email',
                 mensagemDeErro: !oEmailEhValido(email: _loginPageStore.email)
-                    ? 'Um email correto é obrigatório'
+                    ? 'O email é obrigatório'
                     : '',
               ),
               SizedBox(
                 height: 20,
               ),
               TextFieldWidget(
-                obscureText: true,
                 textInputAction: TextInputAction.go,
                 focusNode: _senhaNode,
                 funcaoDeCallbackParaSubmissaoDoText: oFormularioEhValido(
                         email: _loginPageStore.email,
                         senha: _loginPageStore.senha)
-                    ? () async => _navegaParaPaginaInicial(context: context)
+                    ? () async => navegaParaPaginaInicial(context: context)
                     : () => FocusScope.of(context).previousFocus(),
                 funcaoDeCallbackParaAlteracao: (newValue) =>
                     _loginPageStore.atualizarSenha(newValue: newValue),
@@ -78,7 +76,7 @@ class LoginPage extends StatelessWidget with LoginPageMixin {
     );
   }
 
-  _navegaParaPaginaInicial({BuildContext context}) async {
+  navegaParaPaginaInicial({BuildContext context}) async {
     Navigator.push(
       context,
       MaterialPageRoute(

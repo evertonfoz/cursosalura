@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:mobx11/presentation/pages/produtos_selecionados/mobx/produtos_selecionados_store.dart';
+import 'package:mobx10/presentation/pages/produtos_selecionados/mobx/produtos_selecionados_store.dart';
 
 import 'presentation/pages/home/mobx/home_page_store.dart';
 import 'presentation/pages/home/shared_preferences/orientacao_total_pedido_preferences.dart';
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Alura - Curso MobX',
+      title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,

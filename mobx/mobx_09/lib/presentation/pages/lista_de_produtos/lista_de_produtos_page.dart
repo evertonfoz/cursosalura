@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:mobx09/data/datasources/produtos_datasource.dart' as datasource;
-import 'package:mobx09/domain/models/produto_model.dart';
-import 'package:mobx09/presentation/pages/home/mobx/home_page_store.dart';
-import 'package:mobx09/presentation/pages/lista_de_produtos/mixins/lista_de_produtos_page_mixin.dart';
+import 'package:mobx08/data/datasources/produtos_datasource.dart' as datasource;
+import 'package:mobx08/domain/models/produto_model.dart';
+import 'package:mobx08/presentation/pages/home/mobx/home_page_store.dart';
+import 'package:mobx08/presentation/pages/lista_de_produtos/mixins/lista_de_produtos_page_mixin.dart';
 
 import 'widgets/listtile_para_lista_de_produtos_widget.dart';
 

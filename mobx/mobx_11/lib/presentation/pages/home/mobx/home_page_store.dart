@@ -1,8 +1,8 @@
 import 'package:get_it/get_it.dart';
 import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
-import 'package:mobx11/domain/models/produto_model.dart';
-import 'package:mobx11/presentation/pages/produtos_selecionados/mobx/produtos_selecionados_store.dart';
+import 'package:mobx10/domain/models/produto_model.dart';
+import 'package:mobx10/presentation/pages/produtos_selecionados/mobx/produtos_selecionados_store.dart';
 
 part 'home_page_store.g.dart';
 
@@ -40,6 +40,7 @@ abstract class _HomePageStore with Store {
 
   @action
   registrarProduto({ProdutoModel produto, int quantidade}) {
+    _totalPedido += (produto.valor * quantidade);
     _produtosSelecionadosStore.registrarProduto(
         produto: produto, quantidade: quantidade);
   }

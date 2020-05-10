@@ -1,6 +1,6 @@
 {
-    "name": "mobx11",
-    "short_name": "mobx11",
+    "name": "mobx10",
+    "short_name": "mobx10",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

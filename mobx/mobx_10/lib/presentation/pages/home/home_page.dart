@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
-import 'package:mobx10/presentation/mixins/presentation_mixin.dart';
-import 'package:mobx10/presentation/pages/home/shared_preferences/orientacao_total_pedido_preferences.dart';
-import 'package:mobx10/presentation/pages/home/widgets/dica_widget.dart';
-import 'package:mobx10/presentation/pages/lista_de_produtos/lista_de_produtos_page.dart';
-import 'package:mobx10/presentation/pages/produtos_selecionados/produtos_selecionados_page.dart';
+import 'package:mobx09/presentation/mixins/presentation_mixin.dart';
+import 'package:mobx09/presentation/pages/home/shared_preferences/orientacao_total_pedido_preferences.dart';
+import 'package:mobx09/presentation/pages/home/widgets/dica_widget.dart';
+import 'package:mobx09/presentation/pages/lista_de_produtos/lista_de_produtos_page.dart';
+import 'package:mobx09/presentation/pages/produtos_selecionados/produtos_selecionados_page.dart';
 
 import 'mobx/home_page_store.dart';
 import 'widgets/animacao_flecha.dart';

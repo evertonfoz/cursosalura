@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:mobx11/presentation/mixins/presentation_mixin.dart';
-import 'package:mobx11/presentation/pages/produtos_selecionados/mobx/produto_selecionado_store.dart';
-import 'package:mobx11/presentation/pages/produtos_selecionados/mobx/produtos_selecionados_store.dart';
-import 'package:mobx11/presentation/pages/produtos_selecionados/widgets/mixins/botoes_mixins_para_botoes_widgets_para_tile_selecionados.dart';
+import 'package:mobx10/presentation/mixins/presentation_mixin.dart';
+import 'package:mobx10/presentation/pages/produtos_selecionados/mobx/produto_selecionado_store.dart';
+import 'package:mobx10/presentation/pages/produtos_selecionados/mobx/produtos_selecionados_store.dart';
+import 'package:mobx10/presentation/pages/produtos_selecionados/widgets/mixins/botoes_mixins_para_botoes_widgets_para_tile_selecionados.dart';
 
 class BotoesWidgetParaTileSelecionados extends StatelessWidget
     with PresentationMixin, BotoesMixinParaBotoesWidgetsParaTileSelecionados {
@@ -35,26 +35,12 @@ class BotoesWidgetParaTileSelecionados extends StatelessWidget
             size: 38,
           ),
           onTap: () {
-            String mensagemParaSnackBar;
-            Color corParaSnackBar;
-            if (produtoSelecionadoStore.quantidade == 1) {
-              final ProdutosSelecionadosStore _produtosSelecionadosStore =
-                  GetIt.instance.get<ProdutosSelecionadosStore>();
-              _produtosSelecionadosStore.retirarProduto(
-                  produtoSelecionadoStore: produtoSelecionadoStore);
-              mensagemParaSnackBar =
-                  'O produto ${produtoSelecionadoStore.produtoModel.nome.toUpperCase()} foi retirado da seleção';
-              corParaSnackBar = Colors.red;
-            } else {
-              produtoSelecionadoStore.retirarQuantidade();
-              mensagemParaSnackBar =
-                  'Decrementada a quantidade para ${produtoSelecionadoStore.produtoModel.nome.toUpperCase()}';
-              corParaSnackBar = Colors.yellowAccent;
-            }
+            produtoSelecionadoStore.retirarQuantidade();
             _showSnackBar(
                 context: context,
-                texto: mensagemParaSnackBar,
-                cor: corParaSnackBar,
+                texto:
+                    'Decrementada a quantidade para ${produtoSelecionadoStore.produtoModel.nome.toUpperCase()}',
+                cor: Colors.yellowAccent,
                 corParaTexto: Colors.blue[900]);
           },
         ),

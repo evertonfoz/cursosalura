@@ -1,9 +1,9 @@
 import 'package:get_it/get_it.dart';
 import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
-import 'package:mobx11/domain/models/produto_model.dart';
-import 'package:mobx11/presentation/pages/home/mobx/home_page_store.dart';
-import 'package:mobx11/presentation/pages/produtos_selecionados/mobx/produto_selecionado_store.dart';
+import 'package:mobx10/domain/models/produto_model.dart';
+import 'package:mobx10/presentation/pages/home/mobx/home_page_store.dart';
+import 'package:mobx10/presentation/pages/produtos_selecionados/mobx/produto_selecionado_store.dart';
 
 part 'produtos_selecionados_store.g.dart';
 
@@ -36,18 +36,17 @@ abstract class _ProdutosSelecionadosStore with Store {
 
   @action
   registrarProduto({ProdutoModel produto, int quantidade}) {
-    int indexOfProduto = _produtosSelecionados.indexWhere(
-        (element) => element.produtoModel.produtoId == produto.produtoId);
-    if (indexOfProduto < 0) {
-      _produtosSelecionados.add(
-        ProdutoSelecionadoStore(produtoModel: produto, quantidade: quantidade),
-      );
-      final HomePageStore _homePageStore = GetIt.instance.get<HomePageStore>();
-      _homePageStore.incrementarValorProdutoAdicionado(
-          valor: produto.valor * quantidade);
-    } else
-      _produtosSelecionados[indexOfProduto]
-          .adicionarQuantidade(novaQuantidade: quantidade);
+    _produtosSelecionados.add(
+      ProdutoSelecionadoStore(produtoModel: produto, quantidade: quantidade),
+    );
+  }
+
+  @action
+  adicionarQuantidade() {
+    final HomePageStore _homePageStore = GetIt.instance.get<HomePageStore>();
+
+    quantidade++;
+    _homePageStore.incrementarValorProdutoAdicionado(valor: produtoModel.valor);
   }
 
   @action

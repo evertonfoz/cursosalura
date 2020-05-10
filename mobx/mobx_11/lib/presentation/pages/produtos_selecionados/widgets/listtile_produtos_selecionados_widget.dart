@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:intl/intl.dart';
-import 'package:mobx11/presentation/mixins/presentation_mixin.dart';
-import 'package:mobx11/presentation/pages/produtos_selecionados/mobx/produto_selecionado_store.dart';
+import 'package:mobx10/presentation/mixins/presentation_mixin.dart';
+import 'package:mobx10/presentation/pages/produtos_selecionados/mobx/produto_selecionado_store.dart';
 
 import 'botoes_widget_para_tile_selecionados.dart';
 import 'nome_descricao_widget_para_tile_selecionados.dart';

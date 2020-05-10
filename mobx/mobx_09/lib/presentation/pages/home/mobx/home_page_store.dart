@@ -1,8 +1,6 @@
-import 'package:get_it/get_it.dart';
 import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
-import 'package:mobx09/domain/models/produto_model.dart';
-import 'package:mobx09/presentation/pages/produtos_selecionados/mobx/produtos_selecionados_store.dart';
+import 'package:mobx08/domain/models/produto_model.dart';
 
 part 'home_page_store.g.dart';
 
@@ -14,7 +12,6 @@ class HomePageStore = _HomePageStore with _$HomePageStore;
 
 abstract class _HomePageStore with Store {
   final formatacaoMonetaria = NumberFormat.simpleCurrency();
-  final ProdutosSelecionadosStore _produtosSelecionadosStore = GetIt.instance.get<ProdutosSelecionadosStore>();
 
   @observable
   int paginaAtual = 0;
@@ -40,7 +37,6 @@ abstract class _HomePageStore with Store {
   @action
   registrarProduto({ProdutoModel produto, int quantidade}) {
     _totalPedido += (produto.valor * quantidade);
-    _produtosSelecionadosStore.registrarProduto(produto: produto, quantidade: quantidade);
   }
 
   @action

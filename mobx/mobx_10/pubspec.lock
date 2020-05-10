@@ -155,13 +155,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.3.6"
-  dialog_information_to_specific_platform:
-    dependency: "direct main"
-    description:
-      name: dialog_information_to_specific_platform
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.4"
   fixnum:
     dependency: transitive
     description:

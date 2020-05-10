@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mobx08/data/datasources/produtos_datasource.dart' as datasource;
 import 'package:mobx08/domain/models/produto_model.dart';
-import 'package:mobx08/presentation/pages/home/mobx/home_page_store.dart';
 import 'package:mobx08/presentation/pages/lista_de_produtos/mixins/lista_de_produtos_page_mixin.dart';
 
+import 'mobx/lista_de_produtos_page_store.dart';
 import 'widgets/listtile_para_lista_de_produtos_widget.dart';
 
 class ListaDeProdutosPage extends StatelessWidget
     with ListaDeProdutosPageMixin {
-  final HomePageStore _homePageStore = GetIt.instance.get<HomePageStore>();
+  final ListaDeProdutosPageStore _listaDeProdutosPageStore =
+      GetIt.instance.get<ListaDeProdutosPageStore>();
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,7 @@ class ListaDeProdutosPage extends StatelessWidget
               int quantidade = await exibirSelecaoDeQuantidade(
                   context: context, item: produtos[index].nome);
               if (quantidade != null)
-                _homePageStore.registrarProduto(
+                _listaDeProdutosPageStore.registrarProduto(
                     produto: produtos[index], quantidade: quantidade);
             },
           );
