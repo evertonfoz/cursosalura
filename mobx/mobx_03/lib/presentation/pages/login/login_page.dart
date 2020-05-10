@@ -15,7 +15,7 @@ class LoginPage extends StatelessWidget with LoginPageMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('MobX Course - Alura'),
+        title: Text('Alura - Curso de MobX'),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -24,6 +24,7 @@ class LoginPage extends StatelessWidget with LoginPageMixin {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextFieldWidget(
+                keyboardType: TextInputType.emailAddress,
                 focusNode: _emailNode,
                 funcaoDeCallbackParaSubmissaoDoText: () =>
                     FocusScope.of(context).nextFocus(),
@@ -32,19 +33,20 @@ class LoginPage extends StatelessWidget with LoginPageMixin {
                 iconeParaPrefixo: Icons.email,
                 textoDeAjuda: 'Informe o email',
                 mensagemDeErro: !oEmailEhValido(email: _loginPageStore.email)
-                    ? 'O email é obrigatório'
+                    ? 'Um email correto é obrigatório'
                     : '',
               ),
               SizedBox(
                 height: 20,
               ),
               TextFieldWidget(
+                obscureText: true,
                 textInputAction: TextInputAction.go,
                 focusNode: _senhaNode,
                 funcaoDeCallbackParaSubmissaoDoText: oFormularioEhValido(
                         email: _loginPageStore.email,
                         senha: _loginPageStore.senha)
-                    ? () async => navegaParaPaginaInicial(context: context)
+                    ? () async => _navegaParaPaginaInicial(context: context)
                     : () => FocusScope.of(context).previousFocus(),
                 funcaoDeCallbackParaAlteracao: (newValue) =>
                     _loginPageStore.atualizarSenha(newValue: newValue),
@@ -76,7 +78,7 @@ class LoginPage extends StatelessWidget with LoginPageMixin {
     );
   }
 
-  navegaParaPaginaInicial({BuildContext context}) async {
+  _navegaParaPaginaInicial({BuildContext context}) async {
     Navigator.push(
       context,
       MaterialPageRoute(
