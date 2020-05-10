@@ -24,21 +24,19 @@ class HomePage extends StatelessWidget {
         return _paginas[_homePageStore.paginaAtual];
       }),
       bottomNavigationBar: Observer(builder: (_) {
-        return BottomNavigationBar(
+        return BottomNavigationBar(iconSize: 48,
           currentIndex: _homePageStore.paginaAtual,
           onTap: (index) => _homePageStore.alternarPagina(novaPagina: index),
           items: [
             BottomNavigationBarItem(
               icon: new Icon(
                 Icons.menu,
-                size: 48,
               ),
               title: new Text('Produtos'),
             ),
             BottomNavigationBarItem(
               icon: new Icon(
                 Icons.add_shopping_cart,
-                size: 48,
               ),
               title: new Text('Pedido'),
             ),
