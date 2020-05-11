@@ -15,11 +15,11 @@ mixin _$HomePageStore on _HomePageStore, Store {
   String get tituloHomePage => (_$tituloHomePageComputed ??=
           Computed<String>(() => super.tituloHomePage))
       .value;
-  Computed<String> _$totalPedidoComputed;
+  Computed<double> _$totalPedidoComputed;
 
   @override
-  String get totalPedido =>
-      (_$totalPedidoComputed ??= Computed<String>(() => super.totalPedido))
+  double get totalPedido =>
+      (_$totalPedidoComputed ??= Computed<double>(() => super.totalPedido))
           .value;
 
   final _$paginaAtualAtom = Atom(name: '_HomePageStore.paginaAtual');
@@ -73,6 +73,44 @@ mixin _$HomePageStore on _HomePageStore, Store {
     }, _$orientacaoJaLidaAtom, name: '${_$orientacaoJaLidaAtom.name}_set');
   }
 
+  final _$operacaoRealizadaAtom =
+      Atom(name: '_HomePageStore.operacaoRealizada');
+
+  @override
+  String get operacaoRealizada {
+    _$operacaoRealizadaAtom.context.enforceReadPolicy(_$operacaoRealizadaAtom);
+    _$operacaoRealizadaAtom.reportObserved();
+    return super.operacaoRealizada;
+  }
+
+  @override
+  set operacaoRealizada(String value) {
+    _$operacaoRealizadaAtom.context.conditionallyRunInAction(() {
+      super.operacaoRealizada = value;
+      _$operacaoRealizadaAtom.reportChanged();
+    }, _$operacaoRealizadaAtom, name: '${_$operacaoRealizadaAtom.name}_set');
+  }
+
+  final _$exibirBottonNavigationBarAtom =
+      Atom(name: '_HomePageStore.exibirBottonNavigationBar');
+
+  @override
+  bool get exibirBottonNavigationBar {
+    _$exibirBottonNavigationBarAtom.context
+        .enforceReadPolicy(_$exibirBottonNavigationBarAtom);
+    _$exibirBottonNavigationBarAtom.reportObserved();
+    return super.exibirBottonNavigationBar;
+  }
+
+  @override
+  set exibirBottonNavigationBar(bool value) {
+    _$exibirBottonNavigationBarAtom.context.conditionallyRunInAction(() {
+      super.exibirBottonNavigationBar = value;
+      _$exibirBottonNavigationBarAtom.reportChanged();
+    }, _$exibirBottonNavigationBarAtom,
+        name: '${_$exibirBottonNavigationBarAtom.name}_set');
+  }
+
   final _$_HomePageStoreActionController =
       ActionController(name: '_HomePageStore');
 
@@ -87,10 +125,11 @@ mixin _$HomePageStore on _HomePageStore, Store {
   }
 
   @override
-  dynamic registrarProduto({ProdutoModel produto, int quantidade}) {
+  dynamic somarAoTotalDoPedido({double valor, String operacaoRealizada}) {
     final _$actionInfo = _$_HomePageStoreActionController.startAction();
     try {
-      return super.registrarProduto(produto: produto, quantidade: quantidade);
+      return super.somarAoTotalDoPedido(
+          valor: valor, operacaoRealizada: operacaoRealizada);
     } finally {
       _$_HomePageStoreActionController.endAction(_$actionInfo);
     }
@@ -107,9 +146,19 @@ mixin _$HomePageStore on _HomePageStore, Store {
   }
 
   @override
+  dynamic toogleExibirBottonNavigationBar() {
+    final _$actionInfo = _$_HomePageStoreActionController.startAction();
+    try {
+      return super.toogleExibirBottonNavigationBar();
+    } finally {
+      _$_HomePageStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     final string =
-        'paginaAtual: ${paginaAtual.toString()},orientacaoJaLida: ${orientacaoJaLida.toString()},tituloHomePage: ${tituloHomePage.toString()},totalPedido: ${totalPedido.toString()}';
+        'paginaAtual: ${paginaAtual.toString()},orientacaoJaLida: ${orientacaoJaLida.toString()},operacaoRealizada: ${operacaoRealizada.toString()},exibirBottonNavigationBar: ${exibirBottonNavigationBar.toString()},tituloHomePage: ${tituloHomePage.toString()},totalPedido: ${totalPedido.toString()}';
     return '{$string}';
   }
 }

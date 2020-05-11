@@ -55,6 +55,12 @@ class _HomePageState extends State<HomePage> with PresentationMixin {
   }
 
   @override
+  void dispose() {
+    _reactionDisposers.forEach((d) => d());
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,

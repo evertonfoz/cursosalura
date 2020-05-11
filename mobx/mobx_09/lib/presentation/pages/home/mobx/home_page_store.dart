@@ -1,6 +1,4 @@
-import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
-import 'package:mobx08/domain/models/produto_model.dart';
 
 part 'home_page_store.g.dart';
 
@@ -11,8 +9,6 @@ part 'home_page_store.g.dart';
 class HomePageStore = _HomePageStore with _$HomePageStore;
 
 abstract class _HomePageStore with Store {
-  final formatacaoMonetaria = NumberFormat.simpleCurrency();
-
   @observable
   int paginaAtual = 0;
 
@@ -22,12 +18,18 @@ abstract class _HomePageStore with Store {
   @observable
   bool orientacaoJaLida = false;
 
+  @observable
+  String operacaoRealizada;
+
+  @observable
+  bool exibirBottonNavigationBar = true;
+
   @computed
   String get tituloHomePage =>
       (paginaAtual == 0) ? 'Produtos disponíveis' : 'Produtos selecionados';
 
   @computed
-  String get totalPedido => formatacaoMonetaria.format(_totalPedido);
+  double get totalPedido => _totalPedido;
 
   @action
   alternarPagina({int novaPagina}) {
@@ -35,12 +37,18 @@ abstract class _HomePageStore with Store {
   }
 
   @action
-  registrarProduto({ProdutoModel produto, int quantidade}) {
-    _totalPedido += (produto.valor * quantidade);
+  somarAoTotalDoPedido({double valor, String operacaoRealizada}) {
+    this.operacaoRealizada = operacaoRealizada;
+    _totalPedido += valor;
   }
 
   @action
   registrarLeituraOrientacao() {
     orientacaoJaLida = true;
+  }
+
+  @action
+  toogleExibirBottonNavigationBar() {
+    exibirBottonNavigationBar = !exibirBottonNavigationBar;
   }
 }

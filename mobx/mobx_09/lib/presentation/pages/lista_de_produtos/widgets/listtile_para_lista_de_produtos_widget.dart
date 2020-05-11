@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:mobx08/domain/models/produto_model.dart';
-import 'package:mobx08/presentation/mixins/presentation_mixin.dart';
+import 'package:mobx09/domain/models/produto_model.dart';
+import 'package:mobx09/presentation/mixins/presentation_mixin.dart';
 
 class ListTileParaListaDeProdutosWidget extends StatelessWidget
     with PresentationMixin {
