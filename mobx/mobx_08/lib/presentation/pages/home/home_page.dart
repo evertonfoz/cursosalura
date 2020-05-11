@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
+import 'package:intl/intl.dart';
+import 'package:mobx/mobx.dart';
 import 'package:mobx08/presentation/mixins/presentation_mixin.dart';
 import 'package:mobx08/presentation/pages/home/shared_preferences/orientacao_total_pedido_preferences.dart';
 import 'package:mobx08/presentation/pages/home/widgets/clippy_widget.dart';
@@ -9,15 +11,53 @@ import 'package:mobx08/presentation/pages/produtos_selecionados/produtos_selecio
 
 import 'mobx/home_page_store.dart';
 
-class HomePage extends StatelessWidget with PresentationMixin {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> with PresentationMixin {
+  final formatacaoMonetaria = NumberFormat.simpleCurrency();
   final HomePageStore _homePageStore = GetIt.instance.get<HomePageStore>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
+  List<ReactionDisposer> _reactionDisposers;
+
   final List<Widget> _paginas = [
     ListaDeProdutosPage(),
     ProdutosSelecionadosPage(),
   ];
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _reactionDisposers ??= [
+      reaction(
+        (_) => _homePageStore.operacaoRealizada,
+        (String operacaoRealizada) {
+          _homePageStore.toogleExibirBottonNavigationBar();
+          _scaffoldKey.currentState
+              .showSnackBar(
+                SnackBar(
+                  backgroundColor: Colors.blue,
+                  content: gerarText(
+                      texto: _homePageStore.operacaoRealizada,
+                      tamanhoFonte: 20,
+                      cor: Colors.white),
+                  duration: Duration(seconds: 2),
+                ),
+              )
+              .closed
+              .then(
+                  (value) => _homePageStore.toogleExibirBottonNavigationBar());
+        },
+      ),
+    ];
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         title: Observer(builder: (_) {
           return Text(_homePageStore.tituloHomePage);
@@ -30,7 +70,8 @@ class HomePage extends StatelessWidget with PresentationMixin {
               Observer(
                 builder: (_) {
                   return gerarText(
-                    texto: _homePageStore.totalPedido,
+                    texto:
+                        formatacaoMonetaria.format(_homePageStore.totalPedido),
                     negrito: true,
                     cor: Colors.yellowAccent,
                   );
@@ -69,25 +110,28 @@ class HomePage extends StatelessWidget with PresentationMixin {
         );
       }),
       bottomNavigationBar: Observer(builder: (_) {
-        return BottomNavigationBar(
-          currentIndex: _homePageStore.paginaAtual,
-          onTap: (index) => _homePageStore.alternarPagina(novaPagina: index),
-          items: [
-            BottomNavigationBarItem(
-              icon: new Icon(
-                Icons.menu,
-                size: 48,
+        return Visibility(
+          visible: _homePageStore.exibirBottonNavigationBar,
+          child: BottomNavigationBar(
+            currentIndex: _homePageStore.paginaAtual,
+            onTap: (index) => _homePageStore.alternarPagina(novaPagina: index),
+            items: [
+              BottomNavigationBarItem(
+                icon: new Icon(
+                  Icons.menu,
+                  size: 48,
+                ),
+                title: new Text('Produtos'),
               ),
-              title: new Text('Produtos'),
-            ),
-            BottomNavigationBarItem(
-              icon: new Icon(
-                Icons.add_shopping_cart,
-                size: 48,
+              BottomNavigationBarItem(
+                icon: new Icon(
+                  Icons.add_shopping_cart,
+                  size: 48,
+                ),
+                title: new Text('Pedido'),
               ),
-              title: new Text('Pedido'),
-            ),
-          ],
+            ],
+          ),
         );
       }),
     );

@@ -15,8 +15,9 @@ class ListaDeProdutosPageStore = _ListaDeProdutosPageStore
 abstract class _ListaDeProdutosPageStore with Store {
   @action
   registrarProduto({ProdutoModel produto, int quantidade}) {
-    GetIt.I
-        .get<HomePageStore>()
-        .somarAoTotalDoPedido(valor: produto.valor * quantidade);
+    GetIt.I.get<HomePageStore>().somarAoTotalDoPedido(
+        valor: produto.valor * quantidade,
+        operacaoRealizada:
+            'Item ${produto.nome.toUpperCase()} selecionado com a quantidade $quantidade');
   }
 }

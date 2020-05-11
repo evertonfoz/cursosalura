@@ -9,18 +9,18 @@ part of 'home_page_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$HomePageStore on _HomePageStore, Store {
+  Computed<double> _$totalPedidoComputed;
+
+  @override
+  double get totalPedido =>
+      (_$totalPedidoComputed ??= Computed<double>(() => super.totalPedido))
+          .value;
   Computed<String> _$tituloHomePageComputed;
 
   @override
   String get tituloHomePage => (_$tituloHomePageComputed ??=
           Computed<String>(() => super.tituloHomePage))
       .value;
-  Computed<String> _$totalPedidoComputed;
-
-  @override
-  String get totalPedido =>
-      (_$totalPedidoComputed ??= Computed<String>(() => super.totalPedido))
-          .value;
 
   final _$paginaAtualAtom = Atom(name: '_HomePageStore.paginaAtual');
 
@@ -82,7 +82,7 @@ mixin _$HomePageStore on _HomePageStore, Store {
   @override
   String toString() {
     final string =
-        'paginaAtual: ${paginaAtual.toString()},tituloHomePage: ${tituloHomePage.toString()},totalPedido: ${totalPedido.toString()}';
+        'paginaAtual: ${paginaAtual.toString()},totalPedido: ${totalPedido.toString()},tituloHomePage: ${tituloHomePage.toString()}';
     return '{$string}';
   }
 }

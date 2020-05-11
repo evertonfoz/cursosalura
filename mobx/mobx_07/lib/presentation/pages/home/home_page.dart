@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
+import 'package:intl/intl.dart';
 import 'package:mobx07/presentation/mixins/presentation_mixin.dart';
 import 'package:mobx07/presentation/pages/home/shared_preferences/orientacao_total_pedido_preferences.dart';
 import 'package:mobx07/presentation/pages/home/widgets/clippy_widget.dart';
@@ -10,11 +11,13 @@ import 'package:mobx07/presentation/pages/produtos_selecionados/produtos_selecio
 import 'mobx/home_page_store.dart';
 
 class HomePage extends StatelessWidget with PresentationMixin {
+  final formatacaoMonetaria = NumberFormat.simpleCurrency();
   final HomePageStore _homePageStore = GetIt.instance.get<HomePageStore>();
   final List<Widget> _paginas = [
     ListaDeProdutosPage(),
     ProdutosSelecionadosPage(),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +33,8 @@ class HomePage extends StatelessWidget with PresentationMixin {
               Observer(
                 builder: (_) {
                   return gerarText(
-                    texto: _homePageStore.totalPedido,
+                    texto:
+                        formatacaoMonetaria.format(_homePageStore.totalPedido),
                     negrito: true,
                     cor: Colors.yellowAccent,
                   );

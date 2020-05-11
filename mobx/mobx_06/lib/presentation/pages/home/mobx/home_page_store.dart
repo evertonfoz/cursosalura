@@ -1,4 +1,3 @@
-import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
 
 part 'home_page_store.g.dart';
@@ -10,8 +9,6 @@ part 'home_page_store.g.dart';
 class HomePageStore = _HomePageStore with _$HomePageStore;
 
 abstract class _HomePageStore with Store {
-  final formatacaoMonetaria = NumberFormat.simpleCurrency();
-
   @observable
   int paginaAtual = 0;
 
@@ -19,11 +16,11 @@ abstract class _HomePageStore with Store {
   double _totalPedido = 0;
 
   @computed
-  String get tituloHomePage =>
-      (paginaAtual == 0) ? 'Produtos disponíveis' : 'Produtos selecionados';
+  double get totalPedido => _totalPedido;
 
   @computed
-  String get totalPedido => formatacaoMonetaria.format(_totalPedido);
+  String get tituloHomePage =>
+      (paginaAtual == 0) ? 'Produtos disponíveis' : 'Produtos selecionados';
 
   @action
   alternarPagina({int novaPagina}) {
