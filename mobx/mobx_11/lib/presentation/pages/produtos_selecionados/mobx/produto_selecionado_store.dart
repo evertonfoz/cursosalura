@@ -1,8 +1,7 @@
 import 'package:get_it/get_it.dart';
-import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
-import 'package:mobx10/domain/models/produto_model.dart';
-import 'package:mobx10/presentation/pages/home/mobx/home_page_store.dart';
+import 'package:mobx11/domain/models/produto_model.dart';
+import 'package:mobx11/presentation/pages/home/mobx/home_page_store.dart';
 
 part 'produto_selecionado_store.g.dart';
 
@@ -14,7 +13,6 @@ class ProdutoSelecionadoStore = _ProdutoSelecionadoStore
     with _$ProdutoSelecionadoStore;
 
 abstract class _ProdutoSelecionadoStore with Store {
-  final formatacaoMonetaria = NumberFormat.simpleCurrency();
   final HomePageStore _homePageStore = GetIt.instance.get<HomePageStore>();
 
   _ProdutoSelecionadoStore({this.produtoModel, this.quantidade}) {
@@ -22,7 +20,6 @@ abstract class _ProdutoSelecionadoStore with Store {
     this.quantidade = quantidade;
   }
 
-  @observable
   ProdutoModel produtoModel;
 
   @observable
@@ -31,12 +28,18 @@ abstract class _ProdutoSelecionadoStore with Store {
   @action
   adicionarQuantidade() {
     quantidade++;
-    _homePageStore.incrementarValorProdutoAdicionado(valor: produtoModel.valor);
+    _homePageStore.somarAoTotalDoPedido(
+        valor: produtoModel.valor,
+        operacaoRealizada:
+            'Produto ${produtoModel.nome.toUpperCase()} atualizado para $quantidade');
   }
 
   @action
   retirarQuantidade() {
     quantidade--;
-    _homePageStore.decrementarValorProdutoRetirado(valor: produtoModel.valor);
+    _homePageStore.subtrairDoTotalDoPedido(
+        valor: produtoModel.valor,
+        operacaoRealizada:
+            'Produto ${produtoModel.nome.toUpperCase()} atualizado para $quantidade');
   }
 }

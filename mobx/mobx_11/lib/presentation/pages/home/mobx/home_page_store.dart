@@ -1,8 +1,4 @@
-import 'package:get_it/get_it.dart';
-import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
-import 'package:mobx10/domain/models/produto_model.dart';
-import 'package:mobx10/presentation/pages/produtos_selecionados/mobx/produtos_selecionados_store.dart';
 
 part 'home_page_store.g.dart';
 
@@ -13,10 +9,6 @@ part 'home_page_store.g.dart';
 class HomePageStore = _HomePageStore with _$HomePageStore;
 
 abstract class _HomePageStore with Store {
-  final formatacaoMonetaria = NumberFormat.simpleCurrency();
-  final ProdutosSelecionadosStore _produtosSelecionadosStore =
-      GetIt.instance.get<ProdutosSelecionadosStore>();
-
   @observable
   int paginaAtual = 0;
 
@@ -26,12 +18,18 @@ abstract class _HomePageStore with Store {
   @observable
   bool orientacaoJaLida = false;
 
+  @observable
+  String operacaoRealizada;
+
+  @observable
+  bool exibirBottonNavigationBar = true;
+
   @computed
   String get tituloHomePage =>
       (paginaAtual == 0) ? 'Produtos disponíveis' : 'Produtos selecionados';
 
   @computed
-  String get totalPedido => formatacaoMonetaria.format(_totalPedido);
+  double get totalPedido => _totalPedido;
 
   @action
   alternarPagina({int novaPagina}) {
@@ -39,10 +37,15 @@ abstract class _HomePageStore with Store {
   }
 
   @action
-  registrarProduto({ProdutoModel produto, int quantidade}) {
-    _totalPedido += (produto.valor * quantidade);
-    _produtosSelecionadosStore.registrarProduto(
-        produto: produto, quantidade: quantidade);
+  somarAoTotalDoPedido({double valor, String operacaoRealizada}) {
+    this.operacaoRealizada = operacaoRealizada;
+    _totalPedido += valor;
+  }
+
+  @action
+  subtrairDoTotalDoPedido({double valor, String operacaoRealizada}) {
+    this.operacaoRealizada = operacaoRealizada;
+    _totalPedido -= valor;
   }
 
   @action
@@ -51,12 +54,7 @@ abstract class _HomePageStore with Store {
   }
 
   @action
-  incrementarValorProdutoAdicionado({double valor}) {
-    _totalPedido += valor;
-  }
-
-  @action
-  decrementarValorProdutoRetirado({double valor}) {
-    _totalPedido -= valor;
+  toogleExibirBottonNavigationBar() {
+    exibirBottonNavigationBar = !exibirBottonNavigationBar;
   }
 }

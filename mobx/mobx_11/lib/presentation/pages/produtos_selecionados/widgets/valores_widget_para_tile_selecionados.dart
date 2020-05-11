@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:mobx10/presentation/mixins/presentation_mixin.dart';
+import 'package:mobx11/presentation/mixins/presentation_mixin.dart';
 
 class ValoresWidgetParaTileSelecionados extends StatelessWidget
     with PresentationMixin {

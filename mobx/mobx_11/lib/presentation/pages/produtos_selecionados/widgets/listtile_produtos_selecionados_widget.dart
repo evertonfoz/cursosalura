@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:intl/intl.dart';
-import 'package:mobx10/presentation/mixins/presentation_mixin.dart';
-import 'package:mobx10/presentation/pages/produtos_selecionados/mobx/produto_selecionado_store.dart';
+import 'package:get_it/get_it.dart';
+import 'package:mobx11/presentation/mixins/presentation_mixin.dart';
+import 'package:mobx11/presentation/pages/home/mobx/home_page_store.dart';
+import 'package:mobx11/presentation/pages/produtos_selecionados/mobx/produto_selecionado_store.dart';
 
 import 'botoes_widget_para_tile_selecionados.dart';
 import 'nome_descricao_widget_para_tile_selecionados.dart';
@@ -11,7 +12,7 @@ import 'valores_widget_para_tile_selecionados.dart';
 
 class ListTileParaProdutosSelecionadosWidget extends StatelessWidget
     with PresentationMixin {
-  final formatacaoMonetaria = NumberFormat.simpleCurrency();
+  final HomePageStore _homePageStore = GetIt.I.get<HomePageStore>();
   final ProdutoSelecionadoStore produtoSelecionadoStore;
 
   ListTileParaProdutosSelecionadosWidget({
@@ -43,9 +44,14 @@ class ListTileParaProdutosSelecionadosWidget extends StatelessWidget
               valor: produtoSelecionadoStore.produtoModel.valor,
             );
           }),
-          BotoesWidgetParaTileSelecionados(
-            produtoSelecionadoStore: produtoSelecionadoStore,
-          ),
+          Observer(builder: (_) {
+            return Visibility(
+              visible: _homePageStore.exibirBottonNavigationBar,
+              child: BotoesWidgetParaTileSelecionados(
+                produtoSelecionadoStore: produtoSelecionadoStore,
+              ),
+            );
+          }),
           Divider(
             height: 5,
           )
