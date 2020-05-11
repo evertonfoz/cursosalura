@@ -1,5 +1,5 @@
 import 'package:meta/meta.dart';
-import 'package:mobx09/domain/models/produto_model.dart';
+import 'package:mobx10/domain/models/produto_model.dart';
 
 class ProdutoPedidoModel {
   final ProdutoModel produtoModel;
