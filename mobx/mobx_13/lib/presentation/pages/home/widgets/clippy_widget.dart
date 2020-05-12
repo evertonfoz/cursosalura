@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 class ClippyWidget extends StatelessWidget {
   final double messageBoxWidth = 200.0;
-  final double messageBoxHeight = 120.0;
+  final double messageBoxHeight = 130.0;
   final Function funcaoParaRegistrarLeituraOrientacao;
 
   ClippyWidget({this.funcaoParaRegistrarLeituraOrientacao});

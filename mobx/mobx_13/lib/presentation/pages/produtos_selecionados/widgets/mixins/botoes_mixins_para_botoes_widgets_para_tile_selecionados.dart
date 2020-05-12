@@ -9,7 +9,7 @@ mixin BotoesMixinParaBotoesWidgetsParaTileSelecionados {
         Icons.message,
         color: Colors.red,
       ),
-      title: 'Oops...Quer remover?',
+      title: 'Quer remover?',
       message: 'Confirma a retirada de ${mensagem.toUpperCase()}',
       buttons: [
         ActionsFlatButtonToAlertDialog(
