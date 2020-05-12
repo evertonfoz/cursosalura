@@ -47,6 +47,9 @@ class ListTileParaProdutosSelecionadosWidget extends StatelessWidget
           Observer(builder: (_) {
             return Visibility(
               visible: _homePageStore.exibirBottonNavigationBar,
+              maintainSize: true,
+              maintainState: true,
+              maintainAnimation: true,
               child: BotoesWidgetParaTileSelecionados(
                 produtoSelecionadoStore: produtoSelecionadoStore,
               ),

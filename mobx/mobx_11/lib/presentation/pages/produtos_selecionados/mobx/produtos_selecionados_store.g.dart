@@ -34,6 +34,18 @@ mixin _$ProdutosSelecionadosStore on _ProdutosSelecionadosStore, Store {
   }
 
   @override
+  dynamic retirarProduto({ProdutoSelecionadoStore produtoSelecionadoStore}) {
+    final _$actionInfo =
+        _$_ProdutosSelecionadosStoreActionController.startAction();
+    try {
+      return super
+          .retirarProduto(produtoSelecionadoStore: produtoSelecionadoStore);
+    } finally {
+      _$_ProdutosSelecionadosStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     final string = 'produtosSelecionados: ${produtosSelecionados.toString()}';
     return '{$string}';

@@ -9,24 +9,6 @@ part of 'produto_selecionado_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$ProdutoSelecionadoStore on _ProdutoSelecionadoStore, Store {
-  final _$produtoModelAtom =
-      Atom(name: '_ProdutoSelecionadoStore.produtoModel');
-
-  @override
-  ProdutoModel get produtoModel {
-    _$produtoModelAtom.context.enforceReadPolicy(_$produtoModelAtom);
-    _$produtoModelAtom.reportObserved();
-    return super.produtoModel;
-  }
-
-  @override
-  set produtoModel(ProdutoModel value) {
-    _$produtoModelAtom.context.conditionallyRunInAction(() {
-      super.produtoModel = value;
-      _$produtoModelAtom.reportChanged();
-    }, _$produtoModelAtom, name: '${_$produtoModelAtom.name}_set');
-  }
-
   final _$quantidadeAtom = Atom(name: '_ProdutoSelecionadoStore.quantidade');
 
   @override
@@ -48,11 +30,12 @@ mixin _$ProdutoSelecionadoStore on _ProdutoSelecionadoStore, Store {
       ActionController(name: '_ProdutoSelecionadoStore');
 
   @override
-  dynamic adicionarQuantidade({int novaQuantidade = 1}) {
+  dynamic adicionarQuantidade({int quantidadeParaAdicionar = 1}) {
     final _$actionInfo =
         _$_ProdutoSelecionadoStoreActionController.startAction();
     try {
-      return super.adicionarQuantidade(novaQuantidade: novaQuantidade);
+      return super.adicionarQuantidade(
+          quantidadeParaAdicionar: quantidadeParaAdicionar);
     } finally {
       _$_ProdutoSelecionadoStoreActionController.endAction(_$actionInfo);
     }
@@ -71,8 +54,7 @@ mixin _$ProdutoSelecionadoStore on _ProdutoSelecionadoStore, Store {
 
   @override
   String toString() {
-    final string =
-        'produtoModel: ${produtoModel.toString()},quantidade: ${quantidade.toString()}';
+    final string = 'quantidade: ${quantidade.toString()}';
     return '{$string}';
   }
 }

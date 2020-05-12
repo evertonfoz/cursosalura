@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobx11/presentation/mixins/presentation_mixin.dart';
+import 'package:mobx12/presentation/mixins/presentation_mixin.dart';
 
 class NomeDescricaoWidgetParaTileSelecionados extends StatelessWidget
     with PresentationMixin {

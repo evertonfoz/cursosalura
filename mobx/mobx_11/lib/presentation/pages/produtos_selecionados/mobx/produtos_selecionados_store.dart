@@ -30,6 +30,10 @@ abstract class _ProdutosSelecionadosStore with Store {
     _produtosSelecionados.add(
       ProdutoSelecionadoStore(produtoModel: produto, quantidade: quantidade),
     );
+    GetIt.I.get<HomePageStore>().somarAoTotalDoPedido(
+        valor: produto.valor * quantidade,
+        operacaoRealizada:
+            'Item ${produto.nome.toUpperCase()} selecionado com a quantidade $quantidade');
   }
 
   @action

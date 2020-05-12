@@ -1,4 +1,4 @@
-import 'package:mobx11/domain/models/produto_model.dart';
+import 'package:mobx12/domain/models/produto_model.dart';
 
 List<ProdutoModel> _listaDeProdutos = [
   ProdutoModel(
