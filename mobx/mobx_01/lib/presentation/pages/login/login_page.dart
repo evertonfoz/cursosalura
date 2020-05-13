@@ -38,9 +38,9 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
               },
               iconeParaPrefixo: Icons.email,
               textoDeAjuda: 'Informe o email',
-              mensagemDeErro: !oEmailEhValido(email: _email)
-                  ? 'Um email correto é obrigatório'
-                  : '',
+              mensagemDeErro: _mensageDeErro(
+                  valido: oEmailEhValido(email: _email),
+                  mensagem: 'Um email correto é obrigatório'),
             ),
             SizedBox(
               height: 10,
@@ -60,8 +60,9 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
               },
               iconeParaPrefixo: Icons.security,
               textoDeAjuda: 'Informe a senha',
-              mensagemDeErro:
-                  !aSenhaEhValida(senha: _senha) ? 'A senha é obritatória' : '',
+              mensagemDeErro: _mensageDeErro(
+                  valido: aSenhaEhValida(senha: _senha),
+                  mensagem: 'A senha é obritatória'),
             ),
             SizedBox(
               height: 20,
@@ -74,6 +75,13 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
         ),
       ),
     );
+  }
+
+  _mensageDeErro({bool valido, String mensagem}) {
+    if (!valido)
+      return mensagem;
+    else
+      return '';
   }
 
   _onPressedParaAcessar() {

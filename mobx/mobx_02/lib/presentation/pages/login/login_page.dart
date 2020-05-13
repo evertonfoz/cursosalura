@@ -31,10 +31,9 @@ class LoginPage extends StatelessWidget with LoginPageMixin {
                 funcaoDeCallbackParaAlteracao: _loginPageMobx.atualizarEmail,
                 iconeParaPrefixo: Icons.email,
                 textoDeAjuda: 'Informe o email',
-                mensagemDeErro:
-                    !oEmailEhValido(email: _loginPageMobx.email.value)
-                        ? 'Um email correto é obrigatório'
-                        : '',
+                mensagemDeErro: _mensageDeErro(
+                    valido: oEmailEhValido(email: _loginPageMobx.email.value),
+                    mensagem: 'Um email correto é obrigatório'),
               ),
               SizedBox(
                 height: 20,
@@ -51,10 +50,9 @@ class LoginPage extends StatelessWidget with LoginPageMixin {
                 funcaoDeCallbackParaAlteracao: _loginPageMobx.atualizarSenha,
                 iconeParaPrefixo: Icons.security,
                 textoDeAjuda: 'Informe a senha',
-                mensagemDeErro:
-                    !aSenhaEhValida(senha: _loginPageMobx.senha.value)
-                        ? 'A senha é obritatória'
-                        : '',
+                mensagemDeErro: _mensageDeErro(
+                    valido: aSenhaEhValida(senha: _loginPageMobx.senha.value),
+                    mensagem: 'A senha é obritatória'),
               ),
               SizedBox(
                 height: 20,
@@ -68,6 +66,13 @@ class LoginPage extends StatelessWidget with LoginPageMixin {
         }),
       ),
     );
+  }
+
+  _mensageDeErro({bool valido, String mensagem}) {
+    if (!valido)
+      return mensagem;
+    else
+      return '';
   }
 
   _onPressedParaAcessar() {
