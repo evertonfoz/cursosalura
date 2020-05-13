@@ -60,17 +60,22 @@ class LoginPage extends StatelessWidget with LoginPageMixin {
                 height: 20,
               ),
               RaisedButton(
-                  child: Text('Acessar'),
-                  onPressed: oFormularioEhValido(
-                          email: _loginPageMobx.email.value,
-                          senha: _loginPageMobx.senha.value)
-                      ? () async => _navegaParaPaginaInicial(context: context)
-                      : null), // _formSubmit),
+                child: Text('Acessar'),
+                onPressed: _onPressedParaAcessar(),
+              ),
             ],
           );
         }),
       ),
     );
+  }
+
+  _onPressedParaAcessar() {
+    if (oFormularioEhValido(
+        email: _loginPageMobx.email.value, senha: _loginPageMobx.senha.value))
+      return () async => _navegaParaPaginaInicial();
+    else
+      return null;
   }
 
   _navegaParaPaginaInicial({BuildContext context}) async {

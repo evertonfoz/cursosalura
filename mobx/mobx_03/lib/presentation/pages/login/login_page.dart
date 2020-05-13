@@ -60,22 +60,21 @@ class LoginPage extends StatelessWidget with LoginPageMixin {
                 height: 20,
               ),
               RaisedButton(
-                  child: Text('Acessar'),
-                  onPressed: _loginPageStore.oFormularioEhValido
-                      ? () async {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => HomePage(),
-                            ),
-                          );
-                        }
-                      : null), // _formSubmit),
+                child: Text('Acessar'),
+                onPressed: _onPressedParaAcessar(),
+              ),
             ],
           );
         }),
       ),
     );
+  }
+
+  _onPressedParaAcessar() {
+    if (_loginPageStore.oFormularioEhValido)
+      return () async => _navegaParaPaginaInicial();
+    else
+      return null;
   }
 
   _navegaParaPaginaInicial({BuildContext context}) async {

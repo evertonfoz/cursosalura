@@ -67,14 +67,20 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
               height: 20,
             ),
             RaisedButton(
-                child: Text('Acessar'),
-                onPressed: (oFormularioEhValido(email: _email, senha: _senha))
-                    ? () async => _navegaParaPaginaInicial()
-                    : null), // _formSubmit),
+              child: Text('Acessar'),
+              onPressed: _onPressedParaAcessar(),
+            ),
           ],
         ),
       ),
     );
+  }
+
+  _onPressedParaAcessar() {
+    if (oFormularioEhValido(email: _email, senha: _senha))
+      return () async => _navegaParaPaginaInicial();
+    else
+      return null;
   }
 
   _navegaParaPaginaInicial() async {
