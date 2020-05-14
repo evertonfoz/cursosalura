@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mobx01/core/presentation/widgets/textfield_widget.dart';
-import 'package:mobx01/presentation/pages/home/home_page.dart';
 import 'package:mobx01/presentation/pages/login/mixins/login_page_mixin.dart';
 
 class LoginPage extends StatefulWidget {
@@ -38,7 +37,7 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
               },
               iconeParaPrefixo: Icons.email,
               textoDeAjuda: 'Informe o email',
-              mensagemDeErro: _mensageDeErro(
+              mensagemDeErro: mensageDeErro(
                   valido: oEmailEhValido(email: _email),
                   mensagem: 'Um email correto é obrigatório'),
             ),
@@ -49,7 +48,8 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
               obscureText: true,
               focusNode: _senhaNode,
               funcaoDeCallbackParaSubmissaoDoText:
-                  _funcaoDeCallbackParaSubmissaoDoText(),
+                  funcaoDeCallbackParaSubmissaoDoText(
+                      senha: _senha, email: _email, buildContext: context),
               funcaoDeCallbackParaAlteracao: (newValue) {
                 setState(() {
                   _senha = newValue;
@@ -57,7 +57,7 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
               },
               iconeParaPrefixo: Icons.security,
               textoDeAjuda: 'Informe a senha',
-              mensagemDeErro: _mensageDeErro(
+              mensagemDeErro: mensageDeErro(
                   valido: aSenhaEhValida(senha: _senha),
                   mensagem: 'A senha é obritatória'),
             ),
@@ -66,40 +66,11 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
             ),
             RaisedButton(
               child: Text('Acessar'),
-              onPressed: _onPressedParaAcessar(),
+              onPressed: onPressedParaAcessar(
+                  email: _email, senha: _senha, context: context),
             ),
           ],
         ),
-      ),
-    );
-  }
-
-  _funcaoDeCallbackParaSubmissaoDoText() {
-    if (oFormularioEhValido(email: _email, senha: _senha))
-      return () async => _navegaParaPaginaInicial();
-    else
-      return () => FocusScope.of(context).previousFocus();
-  }
-
-  _mensageDeErro({bool valido, String mensagem}) {
-    if (!valido)
-      return mensagem;
-    else
-      return '';
-  }
-
-  _onPressedParaAcessar() {
-    if (oFormularioEhValido(email: _email, senha: _senha))
-      return () async => _navegaParaPaginaInicial();
-    else
-      return null;
-  }
-
-  _navegaParaPaginaInicial() async {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => HomePage(),
       ),
     );
   }

@@ -62,6 +62,23 @@ mixin _$LoginPageStore on _LoginPageStore, Store {
     }, _$senhaAtom, name: '${_$senhaAtom.name}_set');
   }
 
+  final _$emProcessamentoAtom = Atom(name: '_LoginPageStore.emProcessamento');
+
+  @override
+  bool get emProcessamento {
+    _$emProcessamentoAtom.context.enforceReadPolicy(_$emProcessamentoAtom);
+    _$emProcessamentoAtom.reportObserved();
+    return super.emProcessamento;
+  }
+
+  @override
+  set emProcessamento(bool value) {
+    _$emProcessamentoAtom.context.conditionallyRunInAction(() {
+      super.emProcessamento = value;
+      _$emProcessamentoAtom.reportChanged();
+    }, _$emProcessamentoAtom, name: '${_$emProcessamentoAtom.name}_set');
+  }
+
   final _$_LoginPageStoreActionController =
       ActionController(name: '_LoginPageStore');
 
@@ -86,9 +103,19 @@ mixin _$LoginPageStore on _LoginPageStore, Store {
   }
 
   @override
+  dynamic atualizarEmProcessamento({bool newValue}) {
+    final _$actionInfo = _$_LoginPageStoreActionController.startAction();
+    try {
+      return super.atualizarEmProcessamento(newValue: newValue);
+    } finally {
+      _$_LoginPageStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     final string =
-        'email: ${email.toString()},senha: ${senha.toString()},oEmailEhValido: ${oEmailEhValido.toString()},aSenhaEhValida: ${aSenhaEhValida.toString()},oFormularioEhValido: ${oFormularioEhValido.toString()}';
+        'email: ${email.toString()},senha: ${senha.toString()},emProcessamento: ${emProcessamento.toString()},oEmailEhValido: ${oEmailEhValido.toString()},aSenhaEhValida: ${aSenhaEhValida.toString()},oFormularioEhValido: ${oFormularioEhValido.toString()}';
     return '{$string}';
   }
 }

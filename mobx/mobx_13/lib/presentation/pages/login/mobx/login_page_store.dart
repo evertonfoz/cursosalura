@@ -15,6 +15,9 @@ abstract class _LoginPageStore with Store {
   @observable
   String senha = '';
 
+  @observable
+  bool emProcessamento = false;
+
   @computed
   bool get oEmailEhValido => email.trim().length > 0;
 
@@ -32,5 +35,10 @@ abstract class _LoginPageStore with Store {
   @action
   atualizarSenha({String newValue}) {
     senha = newValue;
+  }
+
+  @action
+  atualizarEmProcessamento({bool newValue}) {
+    emProcessamento = newValue;
   }
 }

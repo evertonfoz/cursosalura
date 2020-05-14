@@ -1,21 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx03/core/presentation/widgets/textfield_widget.dart';
-import 'package:mobx03/presentation/pages/home/home_page.dart';
 import 'package:mobx03/presentation/pages/login/mobx/login_page_store.dart';
 
 import 'mixins/login_page_mixin.dart';
 
 class LoginPage extends StatelessWidget with LoginPageMixin {
-  BuildContext _buildContext;
   final _loginPageStore = LoginPageStore();
   final FocusNode _emailNode = FocusNode();
   final FocusNode _senhaNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
-    _buildContext = context;
-
     return Scaffold(
       appBar: AppBar(
         title: Text('Alura - Curso de MobX'),
@@ -35,7 +31,7 @@ class LoginPage extends StatelessWidget with LoginPageMixin {
                     _loginPageStore.atualizarEmail(newValue: newValue),
                 iconeParaPrefixo: Icons.email,
                 textoDeAjuda: 'Informe o email',
-                mensagemDeErro: _mensageDeErro(
+                mensagemDeErro: mensageDeErro(
                     valido: oEmailEhValido(email: _loginPageStore.email),
                     mensagem: 'Um email correto é obrigatório'),
               ),
@@ -47,12 +43,15 @@ class LoginPage extends StatelessWidget with LoginPageMixin {
                 textInputAction: TextInputAction.go,
                 focusNode: _senhaNode,
                 funcaoDeCallbackParaSubmissaoDoText:
-                    _funcaoDeCallbackParaSubmissaoDoText(),
+                    funcaoDeCallbackParaSubmissaoDoText(
+                        email: _loginPageStore.email,
+                        senha: _loginPageStore.senha,
+                        buildContext: context),
                 funcaoDeCallbackParaAlteracao: (newValue) =>
                     _loginPageStore.atualizarSenha(newValue: newValue),
                 iconeParaPrefixo: Icons.security,
                 textoDeAjuda: 'Informe a senha',
-                mensagemDeErro: _mensageDeErro(
+                mensagemDeErro: mensageDeErro(
                     valido: aSenhaEhValida(senha: _loginPageStore.senha),
                     mensagem: 'A senha é obritatória'),
               ),
@@ -61,42 +60,15 @@ class LoginPage extends StatelessWidget with LoginPageMixin {
               ),
               RaisedButton(
                 child: Text('Acessar'),
-                onPressed: _onPressedParaAcessar(),
+                onPressed: onPressedParaAcessar(
+                  email: _loginPageStore.email,
+                  senha: _loginPageStore.senha,
+                  context: context,
+                ),
               ),
             ],
           );
         }),
-      ),
-    );
-  }
-
-  _funcaoDeCallbackParaSubmissaoDoText() {
-    if (oFormularioEhValido(
-        email: _loginPageStore.email, senha: _loginPageStore.senha))
-      return () async => _navegaParaPaginaInicial();
-    else
-      return () => FocusScope.of(_buildContext).previousFocus();
-  }
-
-  _mensageDeErro({bool valido, String mensagem}) {
-    if (!valido)
-      return mensagem;
-    else
-      return '';
-  }
-
-  _onPressedParaAcessar() {
-    if (_loginPageStore.oFormularioEhValido)
-      return () async => _navegaParaPaginaInicial();
-    else
-      return null;
-  }
-
-  _navegaParaPaginaInicial() async {
-    Navigator.push(
-      _buildContext,
-      MaterialPageRoute(
-        builder: (context) => HomePage(),
       ),
     );
   }
