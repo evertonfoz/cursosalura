@@ -7,12 +7,15 @@ import 'mixins/login_page_mixin.dart';
 import 'mobx/login_page_mobx.dart';
 
 class LoginPage extends StatelessWidget with LoginPageMixin {
+  BuildContext _buildContext;
   final _loginPageMobx = LoginPageMobx();
   final FocusNode _emailNode = FocusNode();
   final FocusNode _senhaNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
+    _buildContext = context;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Alura - Curso de MobX'),
@@ -40,13 +43,9 @@ class LoginPage extends StatelessWidget with LoginPageMixin {
               ),
               TextFieldWidget(
                 obscureText: true,
-                textInputAction: TextInputAction.go,
                 focusNode: _senhaNode,
-                funcaoDeCallbackParaSubmissaoDoText: oFormularioEhValido(
-                        email: _loginPageMobx.email.value,
-                        senha: _loginPageMobx.senha.value)
-                    ? () async => _navegaParaPaginaInicial(context: context)
-                    : () => FocusScope.of(context).previousFocus(),
+                funcaoDeCallbackParaSubmissaoDoText:
+                    _funcaoDeCallbackParaSubmissaoDoText(),
                 funcaoDeCallbackParaAlteracao: _loginPageMobx.atualizarSenha,
                 iconeParaPrefixo: Icons.security,
                 textoDeAjuda: 'Informe a senha',
@@ -68,6 +67,14 @@ class LoginPage extends StatelessWidget with LoginPageMixin {
     );
   }
 
+  _funcaoDeCallbackParaSubmissaoDoText() {
+    if (oFormularioEhValido(
+        email: _loginPageMobx.email.value, senha: _loginPageMobx.senha.value))
+      return () async => _navegaParaPaginaInicial();
+    else
+      return () => FocusScope.of(_buildContext).previousFocus();
+  }
+
   _mensageDeErro({bool valido, String mensagem}) {
     if (!valido)
       return mensagem;
@@ -83,9 +90,9 @@ class LoginPage extends StatelessWidget with LoginPageMixin {
       return null;
   }
 
-  _navegaParaPaginaInicial({BuildContext context}) async {
+  _navegaParaPaginaInicial() async {
     Navigator.push(
-      context,
+      _buildContext,
       MaterialPageRoute(
         builder: (context) => HomePage(),
       ),

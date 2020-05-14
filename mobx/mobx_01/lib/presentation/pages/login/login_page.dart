@@ -48,11 +48,8 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
             TextFieldWidget(
               obscureText: true,
               focusNode: _senhaNode,
-              textInputAction: TextInputAction.go,
               funcaoDeCallbackParaSubmissaoDoText:
-                  (oFormularioEhValido(email: _email, senha: _senha))
-                      ? () async => _navegaParaPaginaInicial()
-                      : () => FocusScope.of(context).previousFocus(),
+                  _funcaoDeCallbackParaSubmissaoDoText(),
               funcaoDeCallbackParaAlteracao: (newValue) {
                 setState(() {
                   _senha = newValue;
@@ -75,6 +72,13 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
         ),
       ),
     );
+  }
+
+  _funcaoDeCallbackParaSubmissaoDoText() {
+    if (oFormularioEhValido(email: _email, senha: _senha))
+      return () async => _navegaParaPaginaInicial();
+    else
+      return () => FocusScope.of(context).previousFocus();
   }
 
   _mensageDeErro({bool valido, String mensagem}) {

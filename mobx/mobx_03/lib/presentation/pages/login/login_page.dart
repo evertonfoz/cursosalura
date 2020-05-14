@@ -7,12 +7,15 @@ import 'package:mobx03/presentation/pages/login/mobx/login_page_store.dart';
 import 'mixins/login_page_mixin.dart';
 
 class LoginPage extends StatelessWidget with LoginPageMixin {
+  BuildContext _buildContext;
   final _loginPageStore = LoginPageStore();
   final FocusNode _emailNode = FocusNode();
   final FocusNode _senhaNode = FocusNode();
 
   @override
   Widget build(BuildContext context) {
+    _buildContext = context;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Alura - Curso de MobX'),
@@ -43,11 +46,8 @@ class LoginPage extends StatelessWidget with LoginPageMixin {
                 obscureText: true,
                 textInputAction: TextInputAction.go,
                 focusNode: _senhaNode,
-                funcaoDeCallbackParaSubmissaoDoText: oFormularioEhValido(
-                        email: _loginPageStore.email,
-                        senha: _loginPageStore.senha)
-                    ? () async => _navegaParaPaginaInicial(context: context)
-                    : () => FocusScope.of(context).previousFocus(),
+                funcaoDeCallbackParaSubmissaoDoText:
+                    _funcaoDeCallbackParaSubmissaoDoText(),
                 funcaoDeCallbackParaAlteracao: (newValue) =>
                     _loginPageStore.atualizarSenha(newValue: newValue),
                 iconeParaPrefixo: Icons.security,
@@ -70,6 +70,14 @@ class LoginPage extends StatelessWidget with LoginPageMixin {
     );
   }
 
+  _funcaoDeCallbackParaSubmissaoDoText() {
+    if (oFormularioEhValido(
+        email: _loginPageStore.email, senha: _loginPageStore.senha))
+      return () async => _navegaParaPaginaInicial();
+    else
+      return () => FocusScope.of(_buildContext).previousFocus();
+  }
+
   _mensageDeErro({bool valido, String mensagem}) {
     if (!valido)
       return mensagem;
@@ -84,9 +92,9 @@ class LoginPage extends StatelessWidget with LoginPageMixin {
       return null;
   }
 
-  _navegaParaPaginaInicial({BuildContext context}) async {
+  _navegaParaPaginaInicial() async {
     Navigator.push(
-      context,
+      _buildContext,
       MaterialPageRoute(
         builder: (context) => HomePage(),
       ),
