@@ -25,53 +25,64 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextFieldWidget(
-              keyboardType: TextInputType.emailAddress,
-              focusNode: _emailNode,
-              funcaoDeCallbackParaSubmissaoDoText: () =>
-                  FocusScope.of(context).nextFocus(),
-              funcaoDeCallbackParaAlteracao: (newValue) {
-                setState(() {
-                  _email = newValue;
-                });
-              },
-              iconeParaPrefixo: Icons.email,
-              textoDeAjuda: 'Informe o email',
-              mensagemDeErro: mensageDeErro(
-                  valido: oEmailEhValido(email: _email),
-                  mensagem: 'Um email correto é obrigatório'),
-            ),
+            _textFieldParaEmail(),
             SizedBox(
               height: 10,
             ),
-            TextFieldWidget(
-              obscureText: true,
-              focusNode: _senhaNode,
-              funcaoDeCallbackParaSubmissaoDoText:
-                  funcaoDeCallbackParaSubmissaoDoText(
-                      senha: _senha, email: _email, buildContext: context),
-              funcaoDeCallbackParaAlteracao: (newValue) {
-                setState(() {
-                  _senha = newValue;
-                });
-              },
-              iconeParaPrefixo: Icons.security,
-              textoDeAjuda: 'Informe a senha',
-              mensagemDeErro: mensageDeErro(
-                  valido: aSenhaEhValida(senha: _senha),
-                  mensagem: 'A senha é obritatória'),
-            ),
+            _textFieldParaSenha(),
             SizedBox(
               height: 20,
             ),
-            RaisedButton(
-              child: Text('Acessar'),
-              onPressed: onPressedParaAcessar(
-                  email: _email, senha: _senha, context: context),
-            ),
+            _botaoAcessar(),
           ],
         ),
       ),
+    );
+  }
+
+  _textFieldParaEmail() {
+    return TextFieldWidget(
+      keyboardType: TextInputType.emailAddress,
+      focusNode: _emailNode,
+      funcaoDeCallbackParaSubmissaoDoText: () =>
+          FocusScope.of(context).nextFocus(),
+      funcaoDeCallbackParaAlteracao: (newValue) {
+        setState(() {
+          _email = newValue;
+        });
+      },
+      iconeParaPrefixo: Icons.email,
+      textoDeAjuda: 'Informe o email',
+      mensagemDeErro: mensageDeErro(
+          valido: oEmailEhValido(email: _email),
+          mensagem: 'Um email correto é obrigatório'),
+    );
+  }
+
+  _textFieldParaSenha() {
+    return TextFieldWidget(
+      obscureText: true,
+      focusNode: _senhaNode,
+      funcaoDeCallbackParaSubmissaoDoText: funcaoDeCallbackParaSubmissaoDoText(
+          senha: _senha, email: _email, buildContext: context),
+      funcaoDeCallbackParaAlteracao: (newValue) {
+        setState(() {
+          _senha = newValue;
+        });
+      },
+      iconeParaPrefixo: Icons.security,
+      textoDeAjuda: 'Informe a senha',
+      mensagemDeErro: mensageDeErro(
+          valido: aSenhaEhValida(senha: _senha),
+          mensagem: 'A senha é obritatória'),
+    );
+  }
+
+  _botaoAcessar() {
+    return RaisedButton(
+      child: Text('Acessar'),
+      onPressed:
+          onPressedParaAcessar(email: _email, senha: _senha, context: context),
     );
   }
 }
