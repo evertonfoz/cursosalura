@@ -11,20 +11,24 @@ class ProdutosSelecionadosPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return _conteudoParaExibir();
+  }
+
+  _conteudoParaExibir() {
     return Observer(builder: (_) {
       return _produtosSelecionadosStore.produtosSelecionados.length > 0
           ? ListView.builder(
-              padding: EdgeInsets.symmetric(vertical: 8),
-              itemCount: _produtosSelecionadosStore.produtosSelecionados.length,
-              itemBuilder: (context, index) {
-                return ListTileParaProdutosSelecionadosWidget(
-                  produtoSelecionadoStore:
-                      _produtosSelecionadosStore.produtosSelecionados[index],
-                );
-              })
-          : Center(
-              child: Text('Nenhum produto ainda foi selecionado.'),
+          padding: EdgeInsets.symmetric(vertical: 8),
+          itemCount: _produtosSelecionadosStore.produtosSelecionados.length,
+          itemBuilder: (context, index) {
+            return ListTileParaProdutosSelecionadosWidget(
+              produtoSelecionadoStore:
+              _produtosSelecionadosStore.produtosSelecionados[index],
             );
+          })
+          : Center(
+        child: Text('Nenhum produto ainda foi selecionado.'),
+      );
     });
   }
 }

@@ -11,6 +11,10 @@ class ProdutosSelecionadosPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return _conteudoParaExibir();
+  }
+
+  _conteudoParaExibir() {
     return Observer(builder: (_) {
       return _produtosSelecionadosStore.produtosSelecionados.length > 0
           ? ListView.builder(
