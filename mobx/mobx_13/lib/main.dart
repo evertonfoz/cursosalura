@@ -17,7 +17,7 @@ void main() {
       ProdutosSelecionadosStore());
   HomePageStore _homePageStore = HomePageStore();
   OrientacaoTotalPedidoPreferences.verificarSeJaLeuOrientacao().then((value) {
-    if (value) _homePageStore.registrarLeituraOrientacao();
+//    if (value) _homePageStore.registrarLeituraOrientacao();
     GetIt.I.registerSingleton<HomePageStore>(_homePageStore);
   });
 

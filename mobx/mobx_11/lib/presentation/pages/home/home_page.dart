@@ -87,13 +87,7 @@ class _HomePageState extends State<HomePage>
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: Observer(builder: (_) {
-          return _homePageStore.orientacaoJaLida
-              ? Text(_homePageStore.tituloHomePage)
-              : AnimacaoFlecha(
-                  animacao: _animacao,
-                );
-        }),
+        title: _tituloAppBar(),
         actions: [
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -171,5 +165,16 @@ class _HomePageState extends State<HomePage>
         child:
             Opacity(opacity: 0.3, child: _paginas[_homePageStore.paginaAtual]),
       );
+  }
+
+  _tituloAppBar() {
+    return Observer(builder: (_) {
+      if (_homePageStore.orientacaoJaLida)
+        return Text(_homePageStore.tituloHomePage);
+      else
+        return AnimacaoFlecha(
+          animacao: _animacao,
+        );
+    });
   }
 }

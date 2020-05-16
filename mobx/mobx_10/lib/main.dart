@@ -13,7 +13,8 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   GetIt.I
       .registerSingleton<ListaDeProdutosPageStore>(ListaDeProdutosPageStore());
-  GetIt.I.registerSingleton<ProdutosSelecionadosStore>(ProdutosSelecionadosStore());
+  GetIt.I.registerSingleton<ProdutosSelecionadosStore>(
+      ProdutosSelecionadosStore());
   HomePageStore _homePageStore = HomePageStore();
   OrientacaoTotalPedidoPreferences.verificarSeJaLeuOrientacao().then((value) {
     if (value) _homePageStore.registrarLeituraOrientacao();
