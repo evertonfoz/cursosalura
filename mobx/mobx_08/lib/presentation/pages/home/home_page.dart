@@ -90,13 +90,7 @@ class _HomePageState extends State<HomePage> with PresentationMixin {
       body: Observer(builder: (_) {
         return Stack(
           children: [
-            _homePageStore.orientacaoJaLida
-                ? _paginas[_homePageStore.paginaAtual]
-                : AbsorbPointer(
-                    child: Opacity(
-                        opacity: 0.3,
-                        child: _paginas[_homePageStore.paginaAtual]),
-                  ),
+            _paginaParaExibir(),
             Visibility(
               visible: !_homePageStore.orientacaoJaLida,
               child: Positioned(
@@ -141,5 +135,15 @@ class _HomePageState extends State<HomePage> with PresentationMixin {
         );
       }),
     );
+  }
+
+  _paginaParaExibir() {
+    if (_homePageStore.orientacaoJaLida)
+      return _paginas[_homePageStore.paginaAtual];
+    else
+      return AbsorbPointer(
+        child:
+            Opacity(opacity: 0.3, child: _paginas[_homePageStore.paginaAtual]),
+      );
   }
 }
