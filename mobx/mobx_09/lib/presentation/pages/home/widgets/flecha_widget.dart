@@ -1,10 +1,10 @@
 import 'package:clippy_flutter/clippy_flutter.dart';
 import 'package:flutter/material.dart';
 
-class FechaWidget extends StatelessWidget {
+class FlechaWidget extends StatelessWidget {
   final double esquerda;
 
-  const FechaWidget({this.esquerda});
+  const FlechaWidget({this.esquerda});
 
   @override
   Widget build(BuildContext context) {

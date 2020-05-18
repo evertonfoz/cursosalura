@@ -7,7 +7,7 @@ class AnimacaoFlecha extends AnimatedWidget {
 
   Widget build(BuildContext context) {
     final animacao = listenable as Animation<double>;
-    return FechaWidget(
+    return FlechaWidget(
       esquerda: animacao.value,
     );
   }
