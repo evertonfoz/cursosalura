@@ -49,7 +49,7 @@ class LoginPage extends StatelessWidget with LoginPageMixin {
       iconeParaPrefixo: Icons.email,
       textoDeAjuda: 'Informe o email',
       mensagemDeErro: mensageDeErro(
-          valido: oEmailEhValido(email: _loginPageStore.email),
+          valido: _loginPageStore.oEmailEhValido,
           mensagem: 'Um email correto é obrigatório'),
     );
   }
@@ -57,18 +57,17 @@ class LoginPage extends StatelessWidget with LoginPageMixin {
   _textFieldParaSenha({BuildContext context}) {
     return TextFieldWidget(
       obscureText: true,
-      textInputAction: TextInputAction.go,
+      textInputAction: TextInputAction.next,
       focusNode: _senhaNode,
       funcaoDeCallbackParaSubmissaoDoText: funcaoDeCallbackParaSubmissaoDoText(
-          email: _loginPageStore.email,
-          senha: _loginPageStore.senha,
+          oFormularioEhValido: _loginPageStore.oFormularioEhValido,
           buildContext: context),
       funcaoDeCallbackParaAlteracao: (newValue) =>
           _loginPageStore.atualizarSenha(newValue: newValue),
       iconeParaPrefixo: Icons.security,
       textoDeAjuda: 'Informe a senha',
       mensagemDeErro: mensageDeErro(
-          valido: aSenhaEhValida(senha: _loginPageStore.senha),
+          valido: _loginPageStore.aSenhaEhValida,
           mensagem: 'A senha é obritatória'),
     );
   }
@@ -76,11 +75,9 @@ class LoginPage extends StatelessWidget with LoginPageMixin {
   _botaoAcessar({BuildContext context}) {
     return RaisedButton(
       child: Text('Acessar'),
-      onPressed: onPressedParaAcessar(
-        email: _loginPageStore.email,
-        senha: _loginPageStore.senha,
-        context: context,
-      ),
+      onPressed: _loginPageStore.oFormularioEhValido
+          ? () async => navegaParaPaginaInicial(buildContext: context)
+          : null,
     );
   }
 }
