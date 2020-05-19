@@ -19,7 +19,14 @@ abstract class _LoginPageStore with Store {
   bool emProcessamento = false;
 
   @computed
-  bool get oEmailEhValido => email.trim().length > 0;
+  bool get oEmailEhValido {
+    if (email.trim().length == 0) return false;
+
+    Pattern pattern =
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+    RegExp regex = new RegExp(pattern);
+    return (regex.hasMatch(email));
+  }
 
   @computed
   bool get aSenhaEhValida => senha.trim().length > 0;
