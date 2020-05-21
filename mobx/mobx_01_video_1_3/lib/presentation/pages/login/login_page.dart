@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mobx01/presentation/pages/login/mixins/login_page_mixin.dart';
+
+import 'mixins/login_page_mixin.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -35,6 +36,8 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
                 hintText: 'Informe o email',
               ),
             ),
+            // Código a ser implementado após TextField de email
+            _mensagemDeErro(mensagem: 'Um email correto é obrigatório'),
             TextField(
               keyboardType: TextInputType.text,
               // Código a ser inserido no TextField de senha
@@ -46,6 +49,8 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
                 hintText: 'Informe a senha',
               ),
             ),
+            // Código a ser implementado após TextField de senha
+            _mensagemDeErro(mensagem: 'A senha é obritatória'),
             Padding(
               padding: const EdgeInsets.only(top: 15),
               child: RaisedButton(
@@ -56,6 +61,23 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
           ],
         ),
       ),
+    );
+  }
+
+  // Método a ser implementado após o build()
+  _mensagemDeErro({String mensagem}) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        Text(
+          mensagem,
+          style: TextStyle(
+            color: Colors.red,
+            fontSize: 12,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ],
     );
   }
 }
