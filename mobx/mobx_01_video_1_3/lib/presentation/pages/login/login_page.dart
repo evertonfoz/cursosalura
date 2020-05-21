@@ -12,6 +12,10 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
   final FocusNode _emailNode = FocusNode();
   final FocusNode _senhaNode = FocusNode();
 
+  // Código aser implementado após as declarações dos FocusNodes
+  String _email = '';
+  String _senha = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,9 +39,20 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
                 ),
                 hintText: 'Informe o email',
               ),
+              // Código a ser inserido no widget TextField de email
+              onChanged: (value) {
+                setState(() {
+                  _email = value;
+                });
+              },
             ),
             // Código a ser implementado após TextField de email
-            _mensagemDeErro(mensagem: 'Um email correto é obrigatório'),
+            // Adaptação para a mensagem de erro do email
+            Visibility(
+              visible: !_oEmailEhValido(),
+              child:
+                  _mensagemDeErro(mensagem: 'Um email correto é obrigatório'),
+            ),
             TextField(
               keyboardType: TextInputType.text,
               // Código a ser inserido no TextField de senha
@@ -48,9 +63,19 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
                 ),
                 hintText: 'Informe a senha',
               ),
+              // Código a ser inserido no widget TextField de senha
+              onChanged: (value) {
+                setState(() {
+                  _senha = value;
+                });
+              },
             ),
             // Código a ser implementado após TextField de senha
-            _mensagemDeErro(mensagem: 'A senha é obritatória'),
+            // Adaptação para a mensagem de erro da senha
+            Visibility(
+              visible: !_aSenhaEhValida(),
+              child: _mensagemDeErro(mensagem: 'A senha é obritatória'),
+            ),
             Padding(
               padding: const EdgeInsets.only(top: 15),
               child: RaisedButton(
@@ -79,5 +104,19 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
         ),
       ],
     );
+  }
+
+  // Métodos a serem implementados após o _mensagemDeErro
+  _oEmailEhValido() {
+    if (_email.trim().length == 0) return false;
+
+    Pattern pattern =
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+    RegExp regex = new RegExp(pattern);
+    return (regex.hasMatch(_email));
+  }
+
+  _aSenhaEhValida() {
+    return _senha.trim().length > 0;
   }
 }
