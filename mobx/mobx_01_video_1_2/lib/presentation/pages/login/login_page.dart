@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:mobx01/presentation/pages/login/mixins/login_page_mixin.dart';
 
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> with LoginPageMixin {
+class _LoginPageState extends State<LoginPage> {
   // Código a ser implementado logo no início da classe
   final FocusNode _emailNode = FocusNode();
   final FocusNode _senhaNode = FocusNode();

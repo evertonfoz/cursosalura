@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-
-import 'mixins/login_page_mixin.dart';
+import 'package:mobx01video13/presentation/pages/home/home_page.dart';
 
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> with LoginPageMixin {
+class _LoginPageState extends State<LoginPage> {
   // Código a ser implementado logo no início da classe
   final FocusNode _emailNode = FocusNode();
   final FocusNode _senhaNode = FocusNode();
@@ -80,7 +79,8 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
               padding: const EdgeInsets.only(top: 15),
               child: RaisedButton(
                 child: Text('Acessar'),
-                onPressed: () {},
+                // Adaptação para a propriedade onPressed no RaisedButton
+                onPressed: _oFormularioEhValido(),
               ),
             ),
           ],
@@ -118,5 +118,19 @@ class _LoginPageState extends State<LoginPage> with LoginPageMixin {
 
   _aSenhaEhValida() {
     return _senha.trim().length > 0;
+  }
+
+  // Método a ser implementado após a validação da senha
+  _oFormularioEhValido() {
+    if (_oEmailEhValido() && _aSenhaEhValida()) {
+      return () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => HomePage(),
+            ),
+          );
+    } else {
+      return null;
+    }
   }
 }
