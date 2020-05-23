@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'presentation/pages/login/login_page.dart';
+import 'package:mobx03video31/presentation/pages/home/home_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -20,7 +19,8 @@ class MyApp extends StatelessWidget {
           textTheme: ButtonTextTheme.primary,
         ),
       ),
-      home: LoginPage(),
+      // Adaptação da propriedade home de MaterialApp para agilizar os testes
+      home: HomePage(),
     );
   }
 }

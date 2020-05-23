@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
-import 'package:mobx04/presentation/pages/lista_de_produtos/listadeprodutos_page.dart';
+import 'package:mobx04/presentation/pages/lista_de_produtos/lista_de_produtos_page.dart';
 import 'package:mobx04/presentation/pages/produtos_selecionados/produtos_selecionados_page.dart';
 
 import 'mobx/home_page_store.dart';
