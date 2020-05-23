@@ -80,7 +80,7 @@ class _LoginPageState extends State<LoginPage> {
               child: RaisedButton(
                 child: Text('Acessar'),
                 // Adaptação para a propriedade onPressed no RaisedButton
-                onPressed: _oFormularioEhValido(),
+                onPressed: _onPressedParaBotaoAcessar(),
               ),
             ),
           ],
@@ -121,7 +121,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   // Método a ser implementado após a validação da senha
-  _oFormularioEhValido() {
+  _onPressedParaBotaoAcessar() {
     if (_oEmailEhValido() && _aSenhaEhValida()) {
       return () => Navigator.push(
             context,

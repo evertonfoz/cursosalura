@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:mobx02video22/presentation/pages/home/home_page.dart';
 
 import 'stores/login_page_store.dart';
 
@@ -69,7 +70,7 @@ class LoginPage extends StatelessWidget {
               child: Observer(builder: (_) {
                 return RaisedButton(
                   child: Text('Acessar'),
-                  onPressed: _loginPageStore.oFormularioEhValido,
+                  onPressed: _onPressedParaBotaoAcessar(context: context),
                 );
               }),
             ),
@@ -96,6 +97,7 @@ class LoginPage extends StatelessWidget {
   }
 
   _onPressedParaBotaoAcessar({BuildContext context}) {
+    // Adaptar a expressão de avaliação para fazer uso do Store
     if (_loginPageStore.oFormularioEhValido)
       return () => Navigator.push(
             context,

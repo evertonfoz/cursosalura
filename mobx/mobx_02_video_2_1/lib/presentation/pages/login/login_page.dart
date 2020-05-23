@@ -73,7 +73,7 @@ class LoginPage extends StatelessWidget {
                 return RaisedButton(
                   child: Text('Acessar'),
                   // Adaptação do onPressed de RaisedButton para enviar o contexto ao método _oFormularioEhValido
-                  onPressed: _oFormularioEhValido(context: context),
+                  onPressed: _onPressedParaBotaoAcessar(context: context),
                 );
               }),
             ),
@@ -118,7 +118,7 @@ class LoginPage extends StatelessWidget {
   }
 
   // Adaptação da assinatura do método _oFormularioEhValido
-  _oFormularioEhValido({BuildContext context}) {
+  _onPressedParaBotaoAcessar({BuildContext context}) {
     if (_oEmailEhValido() && _aSenhaEhValida()) {
       return () => Navigator.push(
             context,
