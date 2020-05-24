@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:mobx03video32/domain/models/produto_model.dart';
 import 'package:mobx03video32/presentation/mixins/presentation_mixin.dart';
 
 class ListTileParaListaDeProdutosWidget extends StatelessWidget
     with PresentationMixin {
+  // Declaração implementada no início da classe ListTileParaListaDeProdutosWidget
+  final formatacaoMonetaria = NumberFormat.simpleCurrency(locale: 'pt_BR');
   final ProdutoModel produtoModel;
 
   ListTileParaListaDeProdutosWidget({
@@ -33,7 +36,8 @@ class ListTileParaListaDeProdutosWidget extends StatelessWidget
           ),
           // Valor para o produto
           gerarText(
-              texto: produtoModel.valor.toString(),
+              // Adaptação da propriedade texto na invocação a gerarText para o valor do produto
+              texto: formatacaoMonetaria.format(produtoModel.valor),
               negrito: true,
               cor: Colors.blue),
         ],
