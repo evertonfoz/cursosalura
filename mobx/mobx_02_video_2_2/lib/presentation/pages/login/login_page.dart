@@ -62,7 +62,7 @@ class LoginPage extends StatelessWidget {
               return Visibility(
                 // Atualizar o visible do Visibility para mensagem de erro da senha
                 visible: !_loginPageStore.aSenhaEhValida,
-                child: _mensagemDeErro(mensagem: 'A senha é obritatória'),
+                child: _mensagemDeErro(mensagem: 'A senha é obrigatória'),
               );
             }),
             Padding(

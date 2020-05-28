@@ -1,0 +1,28 @@
+name: mobx03video33
+description: A new Flutter application.
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_mobx: ^1.1.0
+  intl: ^0.16.1
+  #  registro do pacote numberpicker no pubspec.yaml, em dependencies, seguido do Pub get
+  numberpicker: ^1.2.0
+  #  registro do pacote get_it no pubspec.yaml, em dependencies, seguido do Pub get
+  get_it: ^4.0.2
+
+dev_dependencies:
+  build_runner: ^1.9.0
+  mobx_codegen: ^1.0.3
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/produtos/

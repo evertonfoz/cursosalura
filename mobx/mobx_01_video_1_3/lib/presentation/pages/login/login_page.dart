@@ -73,7 +73,7 @@ class _LoginPageState extends State<LoginPage> {
             // Adaptação para a mensagem de erro da senha
             Visibility(
               visible: !_aSenhaEhValida(),
-              child: _mensagemDeErro(mensagem: 'A senha é obritatória'),
+              child: _mensagemDeErro(mensagem: 'A senha é obrigatória'),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 15),

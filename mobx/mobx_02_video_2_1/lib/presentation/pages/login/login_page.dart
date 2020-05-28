@@ -63,7 +63,7 @@ class LoginPage extends StatelessWidget {
             Observer(builder: (_) {
               return Visibility(
                 visible: !_aSenhaEhValida(),
-                child: _mensagemDeErro(mensagem: 'A senha é obritatória'),
+                child: _mensagemDeErro(mensagem: 'A senha é obrigatória'),
               );
             }),
             Padding(
