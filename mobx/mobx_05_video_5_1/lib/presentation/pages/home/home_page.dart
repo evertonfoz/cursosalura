@@ -7,10 +7,17 @@ import 'package:mobx05video51/presentation/pages/lista_de_produtos/lista_de_prod
 import 'package:mobx05video51/presentation/pages/produtos_selecionados/produtos_selecionados_page.dart';
 
 import 'mobx/home_page_store.dart';
-import 'shared_preferences/orientacao_total_pedido_preferences.dart';
+import 'widgets/animacao_flecha_widget.dart';
 import 'widgets/clippy_widget.dart';
 
-class HomePage extends StatelessWidget with PresentationMixin {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+// Registramos o uso do Mixin SingleTickerProviderStateMixin na classe State para HomePage
+class _HomePageState extends State<HomePage>
+    with PresentationMixin, SingleTickerProviderStateMixin {
   final HomePageStore _homePageStore = GetIt.instance.get<HomePageStore>();
   final formatacaoMonetaria = NumberFormat.simpleCurrency(locale: 'pt_BR');
 
@@ -19,13 +26,42 @@ class HomePage extends StatelessWidget with PresentationMixin {
     ProdutosSelecionadosPage(),
   ];
 
+  // Declaração das variáveis que serão utilizadas na animação, dentro da classe _HomePageState
+  Animation<double> _animacao;
+  AnimationController _controladorAnimacao;
+
+  // Sobrescrita do método initState() para instanciar classes responsáveis pela animação e controle dela
+  @override
+  void initState() {
+    super.initState();
+    _controladorAnimacao =
+        AnimationController(duration: const Duration(seconds: 3), vsync: this);
+    _animacao =
+        Tween<double>(begin: -50, end: 300).animate(_controladorAnimacao)
+          ..addStatusListener((status) {
+            if (status == AnimationStatus.completed) {
+              _controladorAnimacao.reset();
+              _controladorAnimacao.forward();
+            }
+          });
+
+    // Implementação a ser inserida antes do final de initState() para que a animação seja iniciada
+    _controladorAnimacao.forward();
+  }
+
+  // Sobrescrita do método dispose() na classe _HomePageState, para liberar recursos utilizados para o controlador da animação
+  @override
+  void dispose() {
+    _controladorAnimacao.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Observer(builder: (_) {
-          return Text(_homePageStore.tituloHomePage);
-        }),
+        // Adaptação da propriedade title para fazer uso do método _tituloAppBar()
+        title: _tituloAppBar(),
         actions: [
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -61,9 +97,7 @@ class HomePage extends StatelessWidget with PresentationMixin {
                 // Registro da função anônima a ser enviada para o ClippyWidget executar quando o botão de confirmação for pressionado
                 child: ClippyWidget(
                   // Adaptação da função anônima para que registre fisicamente a leitura da orientação
-                  funcaoParaRegistrarLeituraOrientacao: () async {
-                    await OrientacaoTotalPedidoPreferences
-                        .registrarLeituraOrientacao();
+                  funcaoParaRegistrarLeituraOrientacao: () {
                     _homePageStore.registrarLeituraOrientacao();
                   },
                 ),
@@ -107,5 +141,17 @@ class HomePage extends StatelessWidget with PresentationMixin {
         child:
             Opacity(opacity: 0.3, child: _paginas[_homePageStore.paginaAtual]),
       );
+  }
+
+  // Criação de um método, após o _conteudoAbaixoDaMensagemDoMascote(), que retornará o conteúdo a ser renderizado para o título
+  _tituloAppBar() {
+    return Observer(builder: (_) {
+      if (_homePageStore.orientacaoJaLida)
+        return Text(_homePageStore.tituloHomePage);
+      else
+        return AnimacaoFlechaWidget(
+          animacao: _animacao,
+        );
+    });
   }
 }

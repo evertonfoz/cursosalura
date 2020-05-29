@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:intl/intl.dart';
-import 'package:mobx04video42/presentation/mixins/presentation_mixin.dart';
-import 'package:mobx04video42/presentation/pages/lista_de_produtos/lista_de_produtos_page.dart';
-import 'package:mobx04video42/presentation/pages/produtos_selecionados/produtos_selecionados_page.dart';
+import 'package:mobx05video51/presentation/mixins/presentation_mixin.dart';
+import 'package:mobx05video51/presentation/pages/lista_de_produtos/lista_de_produtos_page.dart';
+import 'package:mobx05video51/presentation/pages/produtos_selecionados/produtos_selecionados_page.dart';
 
 import 'mobx/home_page_store.dart';
+import 'shared_preferences/orientacao_total_pedido_preferences.dart';
 import 'widgets/animacao_flecha_widget.dart';
 import 'widgets/clippy_widget.dart';
 
@@ -60,12 +61,11 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // Adaptação do title de AppBar, de Scaffold da HomePage para exibição da flecha
         title: Observer(builder: (_) {
-          // Mudança do widget a ser utilizado para o título
           return AnimacaoFlechaWidget(
             animacao: _animacao,
           );
+          // Text(_homePageStore.tituloHomePage);
         }),
         actions: [
           Column(
@@ -90,17 +90,29 @@ class _HomePageState extends State<HomePage>
         // Adaptação do builder do Observer do body de Scaffold para utilizar o Stack
         return Stack(
           children: [
-            _paginas[_homePageStore.paginaAtual],
-            Positioned(
-              right: 0,
-              width: 250,
-              top: 10,
-              child: ClippyWidget(),
+            // Adaptação da renderização da página em exibição no body de HomePage para utilizar o método _conteudoAbaixoDaMensagemDoMascote()
+            _conteudoAbaixoDaMensagemDoMascote(),
+            // Widget Positioned, com a mensagem e mascote encapsulado pelo Visibilty, para exibir apenas enquanto a mensagem não for lida
+            Visibility(
+              visible: !_homePageStore.orientacaoJaLida,
+              child: Positioned(
+                right: 0,
+                width: 250,
+                top: 10,
+                // Registro da função anônima a ser enviada para o ClippyWidget executar quando o botão de confirmação for pressionado
+                child: ClippyWidget(
+                  // Adaptação da função anônima para que registre fisicamente a leitura da orientação
+                  funcaoParaRegistrarLeituraOrientacao: () async {
+                    await OrientacaoTotalPedidoPreferences
+                        .registrarLeituraOrientacao();
+                    _homePageStore.registrarLeituraOrientacao();
+                  },
+                ),
+              ),
             ),
           ],
         );
       }),
-
       // Implementação da propriedade bottomNavigationBar, no Scaffold
       bottomNavigationBar: Observer(builder: (_) {
         return BottomNavigationBar(
@@ -117,6 +129,7 @@ class _HomePageState extends State<HomePage>
     );
   }
 
+  // Criação, abaixo do builder, do método que gerará os botões de opções de acesso
   _bottomNavigationBarItem({IconData icone, String titulo}) {
     return BottomNavigationBarItem(
       icon: new Icon(
@@ -124,5 +137,16 @@ class _HomePageState extends State<HomePage>
       ),
       title: new Text(titulo),
     );
+  }
+
+  // Criação de um método que retornará o conteúdo a ser renderizado ém relação a página exibida em HomePage a ser implementado após o método _bottomNavigationBarItem
+  _conteudoAbaixoDaMensagemDoMascote() {
+    if (_homePageStore.orientacaoJaLida)
+      return _paginas[_homePageStore.paginaAtual];
+    else
+      return AbsorbPointer(
+        child:
+            Opacity(opacity: 0.3, child: _paginas[_homePageStore.paginaAtual]),
+      );
   }
 }
