@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobx05video51/domain/models/produto_model.dart';
+import 'package:mobx05video52/domain/models/produto_model.dart';
 
 import '../../../data/datasources/produtos_datasource.dart' as datasource;
 import 'mixins/lista_de_produtos_page_mixin.dart';

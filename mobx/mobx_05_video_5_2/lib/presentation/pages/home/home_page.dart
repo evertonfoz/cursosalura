@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_it/get_it.dart';
 import 'package:intl/intl.dart';
-import 'package:mobx05video51/presentation/mixins/presentation_mixin.dart';
-import 'package:mobx05video51/presentation/pages/lista_de_produtos/lista_de_produtos_page.dart';
-import 'package:mobx05video51/presentation/pages/produtos_selecionados/produtos_selecionados_page.dart';
+import 'package:mobx05video52/presentation/mixins/presentation_mixin.dart';
+import 'package:mobx05video52/presentation/pages/lista_de_produtos/lista_de_produtos_page.dart';
+import 'package:mobx05video52/presentation/pages/produtos_selecionados/produtos_selecionados_page.dart';
 
 import 'mobx/home_page_store.dart';
 import 'shared_preferences/orientacao_total_pedido_preferences.dart';
@@ -61,12 +61,7 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Observer(builder: (_) {
-          return AnimacaoFlechaWidget(
-            animacao: _animacao,
-          );
-          // Text(_homePageStore.tituloHomePage);
-        }),
+        title: _tituloAppBar(),
         actions: [
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -101,7 +96,7 @@ class _HomePageState extends State<HomePage>
                 top: 10,
                 // Registro da função anônima a ser enviada para o ClippyWidget executar quando o botão de confirmação for pressionado
                 child: ClippyWidget(
-                  // Adaptação da função anônima para que registre fisicamente a leitura da orientação
+                  // Adaptação da função anônima para que registre fisicamente a leitura da orientação na invocação ao widget ClippyWidget
                   funcaoParaRegistrarLeituraOrientacao: () async {
                     await OrientacaoTotalPedidoPreferences
                         .registrarLeituraOrientacao();
@@ -148,5 +143,17 @@ class _HomePageState extends State<HomePage>
         child:
             Opacity(opacity: 0.3, child: _paginas[_homePageStore.paginaAtual]),
       );
+  }
+
+  // Criação de um método, após o _conteudoAbaixoDaMensagemDoMascote(), que retornará o conteúdo a ser renderizado para o título
+  _tituloAppBar() {
+    return Observer(builder: (_) {
+      if (_homePageStore.orientacaoJaLida)
+        return Text(_homePageStore.tituloHomePage);
+      else
+        return AnimacaoFlechaWidget(
+          animacao: _animacao,
+        );
+    });
   }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:mobx05video51/presentation/pages/home/home_page.dart';
+import 'package:mobx05video52/presentation/pages/home/home_page.dart';
 
 import 'stores/login_page_store.dart';
 

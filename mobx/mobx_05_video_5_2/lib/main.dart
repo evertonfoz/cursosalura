@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
-import 'package:mobx05video51/presentation/pages/home/home_page.dart';
+import 'package:mobx05video52/presentation/pages/home/home_page.dart';
 
 import 'presentation/pages/home/mobx/home_page_store.dart';
 import 'presentation/pages/home/shared_preferences/orientacao_total_pedido_preferences.dart';
