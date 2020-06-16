@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -16,39 +17,31 @@ class _LoginPageState extends State<LoginPage> {
         title: Text('Alura - Curso de MobX'),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 8),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextField(
-              keyboardType: TextInputType.emailAddress,
-              textInputAction: TextInputAction.next,
-              onSubmitted: (_) => FocusScope.of(context).nextFocus(),
               focusNode: _emailNode,
+              textInputAction: TextInputAction.next,
+              keyboardType: TextInputType.emailAddress,
+              onSubmitted: (_) => FocusScope.of(context).nextFocus(),
               decoration: InputDecoration(
-                prefixIcon: Icon(
-                  Icons.email,
-                ),
+                prefixIcon: Icon(Icons.email),
                 hintText: 'Informe o email',
               ),
             ),
             TextField(
-              obscureText: true,
-              keyboardType: TextInputType.text,
               focusNode: _senhaNode,
+              obscureText: true,
               decoration: InputDecoration(
-                prefixIcon: Icon(
-                  Icons.security,
-                ),
+                prefixIcon: Icon(Icons.security),
                 hintText: 'Informe a senha',
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 15),
-              child: RaisedButton(
-                child: Text('Acessar'),
-                onPressed: () {},
-              ),
+            RaisedButton(
+              child: Text('Acessar'),
+              onPressed: () {},
             ),
           ],
         ),

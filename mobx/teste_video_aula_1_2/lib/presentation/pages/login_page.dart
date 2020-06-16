@@ -13,7 +13,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Alura - Curso de MobX'),
+        title: Text('Alura Delivery'),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -22,13 +22,11 @@ class _LoginPageState extends State<LoginPage> {
           children: [
             TextField(
               keyboardType: TextInputType.emailAddress,
+              focusNode: _emailNode,
               textInputAction: TextInputAction.next,
               onSubmitted: (_) => FocusScope.of(context).nextFocus(),
-              focusNode: _emailNode,
               decoration: InputDecoration(
-                prefixIcon: Icon(
-                  Icons.email,
-                ),
+                prefix: Icon(Icons.email),
                 hintText: 'Informe o email',
               ),
             ),
@@ -37,14 +35,12 @@ class _LoginPageState extends State<LoginPage> {
               keyboardType: TextInputType.text,
               focusNode: _senhaNode,
               decoration: InputDecoration(
-                prefixIcon: Icon(
-                  Icons.security,
-                ),
+                prefix: Icon(Icons.security),
                 hintText: 'Informe a senha',
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 15),
+              padding: const EdgeInsets.only(top: 15.0),
               child: RaisedButton(
                 child: Text('Acessar'),
                 onPressed: () {},

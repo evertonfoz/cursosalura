@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:testevideoaula12/presentation/pages/login_page.dart';
 
-import 'presentation/pages/login/login_page.dart';
-
+/// Adatapção do método main() para a classe AluraDeliveryAppp
 void main() {
-  runApp(MyApp());
+  runApp(AluraDeliveryApp());
 }
 
-class MyApp extends StatelessWidget {
+class AluraDeliveryApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Alura - Curso MobX',
+      title: 'Alura Delivery',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
-
-        /// Configuração a ser inserida no ThemeData, na classe AluraDeliveryApp, no arquivo main.dart
         buttonTheme: ButtonThemeData(
           buttonColor: Colors.blueAccent,
           shape: RoundedRectangleBorder(),
           textTheme: ButtonTextTheme.primary,
         ),
       ),
+
+      /// Adaptação do home de Scaffold para renderizar o LoginPage
       home: LoginPage(),
     );
   }

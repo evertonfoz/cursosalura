@@ -1,24 +1,20 @@
+import 'package:aluradelivery/presentations/pages/login_page.dart';
 import 'package:flutter/material.dart';
 
-import 'presentation/pages/login/login_page.dart';
-
 void main() {
-  runApp(MyApp());
+  runApp(AluraDeliveryApp());
 }
 
-class MyApp extends StatelessWidget {
+class AluraDeliveryApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Alura - Curso MobX',
+      title: 'Alura Delivery',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
-
-        /// Configuração a ser inserida no ThemeData, na classe AluraDeliveryApp, no arquivo main.dart
         buttonTheme: ButtonThemeData(
           buttonColor: Colors.blueAccent,
-          shape: RoundedRectangleBorder(),
           textTheme: ButtonTextTheme.primary,
         ),
       ),
