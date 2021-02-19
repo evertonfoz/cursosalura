@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatefulWidget {
@@ -14,22 +13,22 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Alura - Curso de MobX'),
+        title: Text('Alura Delivery'),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextField(
               focusNode: _emailNode,
-              textInputAction: TextInputAction.next,
               keyboardType: TextInputType.emailAddress,
-              onSubmitted: (_) => FocusScope.of(context).nextFocus(),
+              textInputAction: TextInputAction.next,
               decoration: InputDecoration(
                 prefixIcon: Icon(Icons.email),
                 hintText: 'Informe o email',
               ),
+              onSubmitted: (_) => FocusScope.of(context).nextFocus(),
             ),
             TextField(
               focusNode: _senhaNode,

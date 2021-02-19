@@ -1,4 +1,4 @@
-import 'package:aluradelivery/presentations/pages/login_page.dart';
+import 'package:aluradelivery/presentation/pages/login_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -9,7 +9,7 @@ class AluraDeliveryApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Alura Delivery',
+      title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
